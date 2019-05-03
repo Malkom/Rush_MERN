@@ -93,13 +93,11 @@ export default class EditUser extends React.Component {
             if(response.data.message === "Successful")
             {
                 localStorage.setItem('usertoken', response.data.token)
-                console.log(response.data.token);
                 this.setState({
                     newName: response.data.editName,
                     wrong: '',
                     fireRedirect: true
                 });
-                console.log(this.state.newName);
             }
             else
             {

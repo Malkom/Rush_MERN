@@ -1,12 +1,17 @@
-import  React, { Component } from 'react'
-import jwt_decode from 'jwt-decode'
+import  React, { Component } from 'react';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 class Profile extends Component {
     constructor() {
-        super()
+        super();
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
-            login : '', 
-            email : ''
+            login : '',
+            email:'', 
+            wrong: '',
+            id: '',
         }
     }
     
@@ -15,8 +20,33 @@ class Profile extends Component {
         const decoded = jwt_decode(token)
         this.setState({
             login : decoded.login,
-            email : decoded.email
+            email: decoded.email,
+            id: decoded._id
         })
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        //console.log(typeof this.state.id);
+        //let string_id = JSON.stringify(this.state.id);
+        axios.delete('http://localhost:4242/users/delete', { params : { id: this.state.id }})
+        .then((response) => {
+            if(response.data.message === "Successful")
+            {
+                e.preventDefault()
+                localStorage.removeItem('usertoken')
+                this.props.history.push('/')
+            }
+            else
+            {
+                this.setState({
+                    wrong: response.data.message
+                });
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     render() {
@@ -41,6 +71,11 @@ class Profile extends Component {
                         <form action={"/" + this.state.login + "/edit_profile"}>
                             <div className="form-group">
                                 <input type="submit" value="Edit Profile" className="btn btn-primary"/>
+                            </div>
+                        </form>
+                        <form onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <input type="submit" value="Delete Profile" className="btn btn-primary"/>
                             </div>
                         </form>
                 </div>
