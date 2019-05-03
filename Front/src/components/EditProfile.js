@@ -47,7 +47,9 @@ export default class EditUser extends React.Component {
         const token = localStorage.usertoken
         const decoded = jwt_decode(token)
         this.setState({
-            login : decoded._id,
+            id : decoded._id,
+            login: decoded.login,
+            token_email: decoded.email
         })
     }
 
@@ -76,7 +78,7 @@ export default class EditUser extends React.Component {
         console.log(`name is ${this.state.name} , email is ${this.state.email}, password is ${this.state.password}, confpass is ${this.state.confPass}`);
         
         const user = {
-            id: this.state.login,
+            id: this.state.id,
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
@@ -135,11 +137,11 @@ export default class EditUser extends React.Component {
                             ))}  
                         <div className="form-group">
                             <label>Name:  </label>
-                            <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName}/>
+                            <input type="text" className="form-control" value={this.state.login} onChange={this.onChangeName}/>
                         </div>
                         <div className="form-group">
                             <label>Email: </label>
-                            <input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/>
+                            <input type="email" className="form-control" value={this.state.token_email} onChange={this.onChangeEmail}/>
                         </div>
                         <div className="form-group">
                             <label>Password: </label>

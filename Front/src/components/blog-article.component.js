@@ -43,7 +43,7 @@ export default class Articles extends React.Component {
             <div className="container">
             <form action={'/'+ this.state.login + '/add_article'}>
                 <div className="form-group">
-                    <input type="submit" value="Add Article" className="btn btn-primary"/>
+                    <input type="submit" value="Add Message" className="btn btn-primary"/>
                 </div>
             </form>
               <table className="table table-striped">
