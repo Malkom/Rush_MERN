@@ -9,18 +9,18 @@ export default class Articles extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          articles: [],
-          login : '', 
-          id:''
+            articles: [],
+            login : '',
+            id:'',
+            date: ''
         };
     }
       componentDidMount(){
-
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
         this.setState({
             login : decoded.login
-        })
+        });
         axios.get('http://localhost:4242/articles' , { params : { id: decoded._id }})
         .then(response => {
             console.log(response.data);
@@ -50,6 +50,7 @@ export default class Articles extends React.Component {
                 <thead>
                   <tr>
                     <td><strong>Description</strong></td>
+                      <td><strong>Last Updated</strong></td>
                   </tr>
                 </thead>
                 <tbody>

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
+let dateFormat = require('dateformat');
 
 class TableRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
       login : '', 
-      email : ''
+      email : '',
+        date : ''
     };
+    let date = new Date(this.props.obj.updated_at);
+    this.setState.date = dateFormat(date, "HH:MM")
   }
   componentDidMount(){
 
@@ -16,7 +20,7 @@ class TableRow extends Component {
     this.setState({
         login : decoded.login,
         email : decoded.email
-    })
+    });
   }
   render() {
     return (
@@ -24,7 +28,10 @@ class TableRow extends Component {
           <td>
             {this.props.obj.description}
           </td>
-          <td className="mr-auto">
+            <td>
+                { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") }h
+            </td>
+          <td className="">
             <form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
                   <div className="form-group">
                       <input type="submit" value="Edit Article" className="btn btn-primary"/>
