@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+        
+        h1 Sign in :
+        if error
+            p #{error}
+            p #{name}
+
+        form(method='POST' action='/users/login')
+          div.form-group
+            label(for='email') Email:
+            input#email.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group
+            label(for='pw') Password:
+            input#pw.form-control(type='password' name='password')
+          button.btn.btn-primary(type='submit') Sign up
+
+
+        form(method='GET' action='/users/register')
+          button.btn.btn-primary(type='submit') Register

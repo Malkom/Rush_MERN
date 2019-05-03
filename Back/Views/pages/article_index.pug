@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+    form(method='GET' action='/users/logout')
+          button.btn.btn-primary(type='submit') Logout
+    h1 Hello #{name} !!
+    ul
+        each article, i in articles
+            ul
+                h1 #{article.title}
+            li= article.image
+            li= article.price
+            form(method='POST' action='/article/display')
+                input#pw.form-control(type="hidden" name = "value" value = article.title)
+                button.btn.btn-primary(type='submit') See Article
+
+    
