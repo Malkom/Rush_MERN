@@ -6,6 +6,16 @@ user = require('../Models/users')
 
 process.env.SECRET_KEY = 'secret';
 
+router.get('/users/findUsers', (request, response) => {
+    user.find({}, function(err, users){
+        //console.log(users);
+        if(err) console.log(err)
+        else{
+            response.json(users);
+        }    
+    });
+})
+
 router.post('/users/login', (request, response) => {
     let email = request.body.email
     let password = request.body.password
