@@ -21,8 +21,7 @@ export default class Articles extends React.Component {
         this.setState({
             login : decoded.login
         })
-
-        axios.get('http://localhost:4242/articles', { params : { id: decoded._id }})
+        axios.get('http://localhost:4242/articles' , { params : { id: decoded._id }})
         .then(response => {
             console.log(response.data);
           this.setState({articles: response.data});

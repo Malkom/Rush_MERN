@@ -22,12 +22,14 @@ class Navbar extends Component {
 
       componentDidMount(){
         const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
+        if(typeof token === 'string' || token instanceof String){
+          const decoded = jwt_decode(token)
+          this.setState({
             login : decoded.login,
             email : decoded.email
         })
-    }
+        }
+      }
 
 
   render() {
