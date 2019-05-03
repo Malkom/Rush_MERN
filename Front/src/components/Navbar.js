@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../Little-Finger-Expression-Gesture-Hand-512.png";
+import logo from "../indian-headdress.png";
 import jwt_decode from 'jwt-decode'
 
 
@@ -67,7 +67,7 @@ class Navbar extends Component {
             <a className= "navbar-brand" href="/" target="_blank">
             <img src={logo} width='60' height='60' alt="Logo"></img>
             </a>
-            <Link to="/" className='navbar-brand'><strong>Little Blog</strong></Link>
+            <Link to="/" className='navbar-brand'><strong>Geronimo</strong></Link>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {/* <form className="form-inline my-2 my-lg-0">

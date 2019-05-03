@@ -5,7 +5,7 @@ export default class HeroSearchView extends React.Component {
         return (
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h1 className="display-4">Welcome to my LittleBlog, please sign in !</h1>
+                    <h1 className="display-4">Welcome to Geronimo, please sign in !</h1>
                 </div>
             </div>
         )
