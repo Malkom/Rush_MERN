@@ -22,22 +22,19 @@ class TableRow extends Component {
     return (
         <tr>
           <td>
-            {this.props.obj.title}
-          </td>
-          <td>
             {this.props.obj.description}
           </td>
-          <td>
-          <form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
-                <div className="form-group">
-                    <input type="submit" value="Edit Article" className="btn btn-primary"/>
-                </div>
-          </form>
-          <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
-                <div className="form-group">
-                    <input type="submit" value="Show Article" className="btn btn-primary"/>
-                </div>
-          </form>
+          <td className="mr-auto">
+            <form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
+                  <div className="form-group">
+                      <input type="submit" value="Edit Article" className="btn btn-primary"/>
+                  </div>
+            </form>
+            <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
+                  <div className="form-group">
+                      <input type="submit" value="Show Article" className="btn btn-primary"/>
+                  </div>
+            </form>
           </td>
         </tr>
     );

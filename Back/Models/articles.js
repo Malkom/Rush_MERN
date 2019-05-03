@@ -8,16 +8,19 @@ let articleSchema = mongoose.Schema({
         type : String,
         required: 'Path is required',
     },
-    title :{
-        type : String,
-        required: 'Enter a title', 
-        unique : true
-    },
     description :{
         type : String,
+        maxlength: 140,
         required : 'Enter a description'
     }
-});
+},
+    {
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at'
+        }
+    }
+);
 
 const article = module.exports = mongoose.model('article', articleSchema);
 

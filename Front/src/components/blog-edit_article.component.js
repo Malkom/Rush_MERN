@@ -1,24 +1,28 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import jwt_decode from 'jwt-decode';
 
 export default class AddArticle extends React.Component {
     constructor(props) {
         super(props);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            title: '',
             description: '',
         }
     }
-    onChangeTitle(e) {
+
+    componentDidMount(){
+        const token = localStorage.usertoken
+        const decoded = jwt_decode(token)
         this.setState({
-            title: e.target.value
-        });
+            login : decoded.login,
+            idCreator: decoded._id
+        })
     }
+
     onChangeDescription(e) {
         this.setState({
             description: e.target.value
@@ -26,10 +30,8 @@ export default class AddArticle extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log(`id is ${this.props.match.params.id} title is ${this.state.title}, description is ${this.state.description}`);
         
         const putArticle = {
-            title: this.state.title,
             description: this.state.description,
             id: this.props.match.params.id
         }
@@ -62,7 +64,6 @@ export default class AddArticle extends React.Component {
 
 
         this.setState({
-            title: '',
             description: '',
         })
     }
@@ -75,10 +76,6 @@ export default class AddArticle extends React.Component {
                 <p>{this.state.wrong}</p>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <label>Title: </label>
-                            <input type="text" className="form-control" value={this.state.title} onChange={this.onChangeTitle}/>
-                        </div>
-                        <div className="form-group">
                             <label>Description: </label>
                             <textarea style={{height: 200, width: 550}}
                             type="text" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
@@ -88,7 +85,7 @@ export default class AddArticle extends React.Component {
                         </div>
                     </form>
                 </div>
-                {this.state.fireRedirect && <Redirect to={'/articles'} push={true} />}
+                {this.state.fireRedirect && <Redirect to={'/'+ this.state.login + '/articles'} push={true} />}
             </div>
         )
     }

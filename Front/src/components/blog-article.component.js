@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router';
+/*import { Redirect } from 'react-router';*/
 import TableRow from './TableRow';
 import jwt_decode from 'jwt-decode'
 
@@ -49,7 +49,6 @@ export default class Articles extends React.Component {
               <table className="table table-striped">
                 <thead>
                   <tr>
-                    <td><strong>Title</strong></td>
                     <td><strong>Description</strong></td>
                   </tr>
                 </thead>

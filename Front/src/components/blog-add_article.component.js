@@ -6,13 +6,11 @@ import jwt_decode from 'jwt-decode'
 export default class AddArticle extends React.Component {
     constructor(props) {
         super(props);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             id:'',
-            title: '',
             description: '',
             login : '', 
         }
@@ -27,11 +25,6 @@ export default class AddArticle extends React.Component {
         })
     }
 
-    onChangeTitle(e) {
-        this.setState({
-            title: e.target.value
-        });
-    }
     onChangeDescription(e) {
         this.setState({
             description: e.target.value
@@ -39,10 +32,8 @@ export default class AddArticle extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log(`title is ${this.state.title}, description is ${this.state.description}`);
         
         const newArticle = {
-            title: this.state.title,
             description: this.state.description,
             id: this.state.idCreator
         }
@@ -75,7 +66,6 @@ export default class AddArticle extends React.Component {
 
 
         this.setState({
-            title: '',
             description: '',
         })
     }
@@ -86,10 +76,6 @@ export default class AddArticle extends React.Component {
                 <h3 style={{marginTop: 30, marginLeft: 50}} >Add Article :</h3>
                 <div style={{marginTop: 50, marginLeft: 200, marginRight:350}}>
                     <form onSubmit={this.onSubmit}>
-                        <div className="form-group">
-                            <label>Title: </label>
-                            <input type="text" className="form-control" value={this.state.title} onChange={this.onChangeTitle}/>
-                        </div>
                         <div className="form-group">
                             <label>Description: </label>
                             <textarea style={{height: 200, width: 550}}

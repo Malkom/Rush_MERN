@@ -18,13 +18,11 @@ router.get('/articles', (request, response) => {
 router.post('/article/add', (request, response) => {
     //const image = request.body.image;
     const idCreator = request.body.id;
-    const title = request.body.title;
     const description = request.body.description;
 
     var newArticle = new article({
         idCreator: idCreator,
         image:'image',
-        title: title,
         description: description
     })
     
@@ -61,8 +59,7 @@ router.get('/article/display', (request, response) => {
 router.post('/article/edit', (request, response) => {
     var query = { _id: request.body.id };
     console.log(query);
-    var update = { 
-        title: request.body.title,
+    var update = {
         description: request.body.description};
 
     article.findOneAndUpdate(query, update, function(err, articles){

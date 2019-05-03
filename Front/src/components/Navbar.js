@@ -56,7 +56,7 @@ class Navbar extends Component {
               <Link to={"/"+ this.state.login + "/profile"} className="nav-link">Profile</Link>
             </li>
             <li className="nav-item">
-              <a href="" onClick={this.logOut.bind(this)} className="nav-link">Logout</a>
+              <a href="/" onClick={this.logOut.bind(this)} className="nav-link">Logout</a>
             </li>
         </ul>
     </div>
@@ -64,8 +64,8 @@ class Navbar extends Component {
 
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className= "navbar-brand" href="#" target="_blank">
-            <img src={logo} width='60' height='60'></img>
+            <a className= "navbar-brand" href="/" target="_blank">
+            <img src={logo} width='60' height='60' alt="Logo"></img>
             </a>
             <Link to="/" className='navbar-brand'><strong>Little Blog</strong></Link>
 
