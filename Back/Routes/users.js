@@ -6,12 +6,7 @@ user = require('../Models/users')
 
 process.env.SECRET_KEY = 'secret';
 
-router.get('/users/login', (request, response) => {
-    response.render('pages/login')
-})
-
 router.post('/users/login', (request, response) => {
-    console.log(request.body);
     let email = request.body.email
     let password = request.body.password
 
@@ -64,11 +59,7 @@ router.post('/users/login', (request, response) => {
     });
 });
 
-router.get('/users/register', (request, response) => {
-    response.render('pages/register')
-})
 router.post('/users/register', (request, response) => {
-    console.log(request.body)
     let name = request.body.name
     let email = request.body.email
     let password = request.body.password
@@ -102,16 +93,47 @@ router.post('/users/register', (request, response) => {
     }); 
 })
 
-router.get('/users/logout', function(request, response, next) {
-    if (request.session.name) {
-      request.session.destroy(function(err) {
-        if(err) {
-          return next(err);
-        } else {
-          return response.redirect('/');
+router.post('/users/edit', (request, response) => {
+    /// create hash password
+    const hash = crypto.createHash('sha1');
+    let pass_hash = hash.update(request.body.password, 'utf-8');
+    gen_hash= pass_hash.digest('hex');
+
+    var query = { _id: request.body.id };
+    var update = { 
+        login: request.body.name,
+        email: request.body.email,
+        password: gen_hash
+    };
+    //////// Insert params into mongo ///////////
+    user.findOneAndUpdate(query, update, {new: true}, function(err, user){
+        console.log(user);
+        if(err) 
+        {   
+            response.send(JSON.stringify({
+            message: 'Oops, Something went wrong.'
+            }));
+            console.log(err)
         }
-      });
-    }
-  });
+
+        else {
+            const payload = {
+                _id: user._id,
+                login: user.login,
+                email: user.email
+            }
+            let token = jwt.sign(payload, process.env.SECRET_KEY, {
+                expiresIn:1440
+            })
+            response.send(JSON.stringify({
+            message: 'Successful',
+            token: token,
+            editName: user.login
+            }));
+        }
+    }); 
+})
+
+
 
 module.exports = router;

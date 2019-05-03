@@ -38,6 +38,11 @@ class Profile extends Component {
                                 </tr>
                             </tbody>
                         </table>
+                        <form action={"/" + this.state.login + "/edit_profile"}>
+                            <div className="form-group">
+                                <input type="submit" value="Edit Profile" className="btn btn-primary"/>
+                            </div>
+                        </form>
                 </div>
             </div>   
         )        
