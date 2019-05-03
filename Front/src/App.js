@@ -13,6 +13,7 @@ import blogEdit_Article from "./components/blog-edit_article.component";
 import blogShow_Article from "./components/blog-show_article.component";
 import Navbar from "./components/Navbar";
 import Profile from './components/Profile';
+import EditProfile from './components/EditProfile';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register" component={blogRegister}/>
         <Route path="/:user" component={blogUser}/>
         <Route path="/:user/profile" component={Profile}/>
+        <Route path="/:user/edit_profile" component={EditProfile}/>
         <Route path='/:user/articles' component={blogArticle} />
         <Route path="/:user/add_article" component={blogAdd_Article}/>
         <Route path="/:user/edit_article/:id" component={blogEdit_Article}/>
