@@ -10,7 +10,7 @@ export default class User extends React.Component {
         
             return (
                 <div style={{ marginLeft: 100}}>
-                    <p> Welcome {userName}</p>
+                    <h1> Welcome {userName}</h1>
                     {this.props.children}
                 </div>
             )

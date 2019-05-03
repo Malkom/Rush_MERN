@@ -14,6 +14,7 @@ import blogShow_Article from "./components/blog-show_article.component";
 import Navbar from "./components/Navbar";
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
+import MemberList from './components/MemberList';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" component={blogLogin}/>
         <Route path="/register" component={blogRegister}/>
         <Route path="/:user" component={blogUser}/>
+        <Route path="/:user/memberList" component={MemberList}/>
         <Route path="/:user/profile" component={Profile}/>
         <Route path="/:user/edit_profile" component={EditProfile}/>
         <Route path='/:user/articles' component={blogArticle} />
