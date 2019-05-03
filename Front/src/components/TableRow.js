@@ -10,8 +10,7 @@ class TableRow extends Component {
       email : '',
         date : ''
     };
-    let date = new Date(this.props.obj.updated_at);
-    this.setState.date = dateFormat(date, "HH:MM")
+
   }
   componentDidMount(){
 
@@ -29,7 +28,7 @@ class TableRow extends Component {
             {this.props.obj.description}
           </td>
             <td>
-                { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") }h
+                { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") } hour(s) ago
             </td>
           <td className="">
             <form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>

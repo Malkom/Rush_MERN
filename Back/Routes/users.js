@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 let crypto = require('crypto');
-const jwt = require('jsonwebtoken')
-user = require('../Models/users')
+const jwt = require('jsonwebtoken');
+user = require('../Models/users');
 
 process.env.SECRET_KEY = 'secret';
 
 router.get('/users/findUsers', (request, response) => {
     user.find({}, function(err, users){
         //console.log(users);
-        if(err) console.log(err)
+        if(err) console.log(err);
         else{
             response.json(users);
         }    
@@ -17,8 +17,8 @@ router.get('/users/findUsers', (request, response) => {
 })
 
 router.post('/users/login', (request, response) => {
-    let email = request.body.email
-    let password = request.body.password
+    let email = request.body.email;
+    let password = request.body.password;
 
     /// create login hash password
     const hash = crypto.createHash('sha1');

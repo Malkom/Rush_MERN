@@ -25,12 +25,17 @@ export default class AddArticle extends React.Component {
       } */
 
     componentDidMount(){
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-            login : decoded.login,
-            idCreator: decoded._id
-        })
+        const token = localStorage.usertoken;
+        if(!token){
+            this.props.history.push('/login')
+        }
+        else {
+            const decoded = jwt_decode(token);
+            this.setState({
+                login : decoded.login,
+                idCreator: decoded._id
+            })
+        }
     }
 
     handleKeyPress(e) {

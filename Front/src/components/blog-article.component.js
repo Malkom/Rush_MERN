@@ -16,11 +16,12 @@ export default class Articles extends React.Component {
         };
     }
       componentDidMount(){
-        const token = localStorage.usertoken;
-        const decoded = jwt_decode(token);
-        this.setState({
-            login : decoded.login
-        });
+          const token = localStorage.usertoken;
+          const decoded = jwt_decode(token);
+          this.setState({
+              login: decoded.login
+              });
+
         axios.get('http://localhost:4242/articles' , { params : { id: decoded._id }})
         .then(response => {
             console.log(response.data);

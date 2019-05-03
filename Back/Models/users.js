@@ -5,7 +5,7 @@ let userSchema = mongoose.Schema({
         type : String,
         required: 'Login is required',
         unique : true,
-        minlength: 5,
+        minlength: 2,
         maxlength: 20
     },
     email :{

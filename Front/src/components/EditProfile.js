@@ -9,8 +9,8 @@ function validate(register) {
     // in a signle array
     const errors = [];
   
-    if (register.name.length < 5 || register.name.length > 20) {
-      errors.push("Name must be between 5 and 20 characters");
+    if (register.name.length < 2 || register.name.length > 20) {
+      errors.push("Name must be between 2 and 20 characters");
     }
   
     if (register.password !== register.confPass) {
@@ -44,13 +44,18 @@ export default class EditUser extends React.Component {
     }
 
     componentDidMount(){
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-            id : decoded._id,
-            login: decoded.login,
-            token_email: decoded.email
-        })
+        const token = localStorage.usertoken;
+        if(!token){
+            this.props.history.push('/login')
+        }
+        else {
+            const decoded = jwt_decode(token);
+            this.setState({
+                id: decoded._id,
+                login: decoded.login,
+                token_email: decoded.email
+            })
+        }
     }
 
     onChangeName(e) {

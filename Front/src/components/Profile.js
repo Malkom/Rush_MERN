@@ -16,13 +16,19 @@ class Profile extends Component {
     }
     
     componentDidMount(){
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-            login : decoded.login,
-            email: decoded.email,
-            id: decoded._id
-        })
+        const token = localStorage.usertoken;
+        if(!token){
+            this.props.history.push('/login')
+        }
+        else {
+
+            const decoded = jwt_decode(token);
+            this.setState({
+                login : decoded.login,
+                email: decoded.email,
+                id: decoded._id
+            })
+        }
     }
 
     onSubmit(e) {

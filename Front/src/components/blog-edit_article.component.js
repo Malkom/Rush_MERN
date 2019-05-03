@@ -15,12 +15,17 @@ export default class AddArticle extends React.Component {
     }
 
     componentDidMount(){
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-            login : decoded.login,
-            idCreator: decoded._id
-        })
+        const token = localStorage.usertoken;
+        if(!token){
+            this.props.history.push('/login')
+        }
+        else {
+            const decoded = jwt_decode(token);
+            this.setState({
+                login: decoded.login,
+                idCreator: decoded._id
+            })
+        }
     }
 
     onChangeDescription(e) {
@@ -37,7 +42,7 @@ export default class AddArticle extends React.Component {
         }
         axios.post('http://localhost:4242/article/edit', putArticle)
         .then((response) => {
-            console.log(response.data)
+            console.log(response.data);
             if(response.data.message === "Successful")
             {
                 /* this.props.authenticate({
