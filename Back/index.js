@@ -33,10 +33,8 @@ app.use(bodyParser.urlencoded({ extend: true}));
 app.use(bodyParser.json());
 
 ///Route
-var indexRouter = require('./Routes/index');
 var usersRouter = require('./Routes/users');
 var articlesRouter = require('./Routes/article');
-app.use('/', indexRouter);
 app.use('/', usersRouter);
 app.use('/', articlesRouter);
 
