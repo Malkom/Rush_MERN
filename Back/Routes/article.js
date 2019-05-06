@@ -4,9 +4,7 @@ var router = express.Router();
 let article = require('../Models/articles')
 
 router.get('/articles', (request, response) => {
-    let param = request.query.id;
-    console.log(param);
-    article.find({idCreator: param}, function(err, articles){
+    article.find({}, function(err, articles){
         console.log(articles);
         if(err) console.log(err)
         else{
