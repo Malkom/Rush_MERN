@@ -1,17 +1,17 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-let article = require('../Models/articles')
+let article = require('../Models/articles');
 
 router.get('/articles', (request, response) => {
-    article.find({}, function(err, articles){
+    article.find({}, null, {sort:{updated_at: -1}}, function(err, articles){
         console.log(articles);
-        if(err) console.log(err)
+        if(err) console.log(err);
         else{
             response.json(articles);
         }    
     });
-})
+});
 
 router.post('/article/add', (request, response) => {
     //const image = request.body.image;

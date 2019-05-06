@@ -13,7 +13,7 @@ class TableRow extends Component {
             idCreator: '',
         };
   }
-  
+
   componentDidMount(){
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
