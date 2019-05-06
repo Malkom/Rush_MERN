@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 /*import { Redirect } from 'react-router';*/
 import TableRow from './TableRow';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
+import imgBack from '../img/indian-village.png';
 
 export default class Articles extends React.Component {
 
@@ -58,14 +59,15 @@ export default class Articles extends React.Component {
 
       render() {
         return (
-            <div className="container">
+        <div className="container">
+            <img className="bg" src={imgBack} alt="Logo"></img>
             <form action={'/'+ this.state.login + '/add_article'}>
                 <div className="form-group">
                     <input type="submit" value="Add Message" className="btn btn-primary"/>
                 </div>
             </form>
                     {this.tab()}
-          </div>
+        </div>
           );
     }
 }

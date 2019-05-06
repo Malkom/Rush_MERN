@@ -10,7 +10,7 @@ class Footer extends Component {
         return(
         <footer className="footer mt-auto py-3">
             <nav className="navbar fixed-bottom text-white bg-dark">
-                <div className="navbar-collapse font-italic" id="navbarText">
+                <div className="navbar-collapse font-italic text-center" id="navbarText">
                 © Copyright Geronimo 2019
                 </div>
             </nav>

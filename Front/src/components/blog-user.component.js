@@ -9,7 +9,7 @@ export default class User extends React.Component {
         let userName = this.props.match.params.user;
         
             return (
-                <div style={{ marginLeft: 100, marginTop: 30}}>
+                <div className="user">
                     <h1> Welcome {userName}</h1>
                     {this.props.children}
                 </div>

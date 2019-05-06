@@ -66,7 +66,7 @@ class Navbar extends Component {
       )
 
     return(
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
             <a className= "navbar-brand" href="/" target="_blank">
             <img src={logo} width='60' height='60' alt="Logo"></img>
             </a>
