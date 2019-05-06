@@ -11,11 +11,9 @@ class TableRow extends Component {
             email : '',
             date : '',
             idCreator: '',
-            author_name: ''
         };
   }
-
-
+  
   componentDidMount(){
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
@@ -31,13 +29,13 @@ class TableRow extends Component {
     if(this.props.obj.idCreator === this.state.id)
     {
       edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
-                <div className="form-group mx-3">
+                <div className="form-group mr-1">
                   <input type="submit" value="Edit Article" className="btn btn-primary btn-sm"/>
                 </div>
               </form>
               )
       remove = (<form action={'/' + this.state.login + '/delete_article/' + this.props.obj._id}>
-              <div className="form-group mx-3">
+              <div className="form-group mr-1">
                 <input type="submit" value="Delete Article" className="btn btn-primary btn-sm"/>
               </div>
             </form>
