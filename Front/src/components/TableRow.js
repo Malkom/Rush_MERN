@@ -27,6 +27,7 @@ class TableRow extends Component {
   }
   render() {
     let edit;
+    let remove;
     if(this.props.obj.idCreator === this.state.id)
     {
       edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
@@ -35,6 +36,12 @@ class TableRow extends Component {
                 </div>
               </form>
               )
+      remove = (<form action={'/' + this.state.login + '/delete_article/' + this.props.obj._id}>
+              <div className="form-group mx-3">
+                <input type="submit" value="Delete Article" className="btn btn-primary btn-sm"/>
+              </div>
+            </form>
+            )
     }
     return (
         <div className="container">
@@ -48,6 +55,7 @@ class TableRow extends Component {
 
                             <div className="float-right d-inline-flex">
                                 {edit}
+                                {remove}
                                 <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
                                     <div className="form-group">
                                         <input type="submit" value="Show Article" className="btn btn-primary btn-sm"/>
