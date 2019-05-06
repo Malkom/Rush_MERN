@@ -77,4 +77,26 @@ router.post('/article/edit', (request, response) => {
     }); 
 })
 
+router.delete('/article/delete', (request, response) => {
+    let param = request.query.id;
+    //var query = { _id: request.body.id };
+    //console.log(query);
+    //////// Insert params into mongo ///////////
+    article.findByIdAndRemove(param, function(err){
+        if(err) 
+        {   
+            response.send(JSON.stringify({
+            message: 'Oops, Something went wrong. We cannot delete your message.'
+            }));
+            console.log(err)
+        }
+
+        else {
+            response.send(JSON.stringify({
+            message: 'Successful'
+            }));
+        }
+    }); 
+})
+
 module.exports = router;

@@ -15,7 +15,8 @@ export default class Articles extends React.Component {
             date: ''
         };
     }
-      componentDidMount(){
+    
+    componentDidMount(){
           const token = localStorage.usertoken;
           const decoded = jwt_decode(token);
           this.setState({
@@ -31,12 +32,24 @@ export default class Articles extends React.Component {
           console.log(error);
         })
       }
-      tab(){
-        return this.state.articles.map(function(object, i){
-            return <TableRow obj={object} key={i} />;
-        });
 
-    }
+      tab(){
+        let self = this;
+        return this.state.articles.map(function(object, i){
+            return <TableRow obj={object} key={i} var={i} alert={self.getAlert} />;
+        });
+      }
+
+      getAlert(key){
+        ;
+        var array = [...this.state.articles]; // make a separate copy of the array
+        var index = array.indexOf(key)
+        if (index !== -1) {
+          array.splice(index, 1);
+          this.setState({articles: array});
+        }
+      }
+
 
       render() {
         return (
