@@ -18,19 +18,24 @@ export default class Articles extends React.Component {
     
     componentDidMount(){
           const token = localStorage.usertoken;
-          const decoded = jwt_decode(token);
-          this.setState({
-              login: decoded.login
+          if(!token){
+              this.props.history.push('/login')
+          }
+          else {
+              const decoded = jwt_decode(token);
+              this.setState({
+                  login: decoded.login
               });
 
-        axios.get('http://localhost:4242/articles')
-        .then(response => {
-            console.log(response.data);
-          this.setState({articles: response.data});
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
+              axios.get('http://localhost:4242/articles')
+                  .then(response => {
+                      console.log(response.data);
+                      this.setState({articles: response.data});
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                  })
+          }
       }
 
       tab(){

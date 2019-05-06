@@ -19,7 +19,7 @@ class TableRow extends Component {
             fireRedirect: false
         };
   }
-  
+
   componentDidMount(){
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);

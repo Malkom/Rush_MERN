@@ -28,6 +28,17 @@ export default class AddArticle extends React.Component {
                 idCreator: decoded._id
             })
         }
+
+        axios.get('http://localhost:4242/article/display', {params: {id: this.props.match.params.id}})
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    description: response.data.description
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     handleKeyPress(e) {
@@ -96,7 +107,7 @@ export default class AddArticle extends React.Component {
                             <Counter length={this.state.length} /> 
                         </div>
                         <div className="form-group">
-                            <input type="submit" value="Add" className="btn btn-primary"/>
+                            <input type="submit" value="Edit" className="btn btn-primary"/>
                         </div>
                     </form>
                 </div>
