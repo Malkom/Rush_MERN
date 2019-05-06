@@ -11,7 +11,8 @@ export default class MemberList extends React.Component {
         this.state = {
           users: [],
           login : '', 
-          id:''
+          id:'',
+          email: '',
         };
     }
       componentDidMount(){
@@ -22,13 +23,14 @@ export default class MemberList extends React.Component {
           else {
               const decoded = jwt_decode(token);
               this.setState({
-                  login: decoded.login
+                  id: decoded._id,
+                  login: decoded.login,
+                  email: decoded.email
               });
 
-
-              axios.get('http://localhost:4242/users/findUsers')
+              axios.get('http://localhost:4242/users/findUsers', {params: {email: decoded.email}})
                   .then(response => {
-                      console.log(response.data);
+                      //console.log(response.data);
                       this.setState({users: response.data});
                   })
                   .catch(function (error) {
@@ -49,8 +51,9 @@ export default class MemberList extends React.Component {
             <div className="container">
               <table className="table table-striped">
                 <thead>
-                  <tr>
-                    <td><strong>Geronimo's member</strong></td>
+                  <tr className="row">
+                    <td className="col-lg-8"><strong>Geronimo's member</strong></td>
+                    <td className="col-lg-4"><strong>Follows</strong></td>
                   </tr>
                 </thead>
                 <tbody>

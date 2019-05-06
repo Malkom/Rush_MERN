@@ -51,22 +51,22 @@ class TableMember extends Component {
 
   render() {
     return (
-        <tr>
-          <td>
+        <tr className="row">
+            <td className="col-lg-8">
             {this.props.obj.login}
-          </td>
-          <td className="mr-auto">
-            <form onSubmit={this.onFollow}>
-                  <div className="form-group">
-                      <input type="submit" value="Follow" className="btn btn-primary"/>
-                  </div>
-            </form>
-            {/* <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
-                  <div className="form-group">
-                      <input type="submit" value="Show Article" className="btn btn-primary"/>
-                  </div>
-            </form> */}
-          </td>
+            </td>
+            <td className="col-lg-4">
+                <form onSubmit={this.onFollow}>
+                      <div className="form-group">
+                          <input type="submit" value="Follow" className="btn btn-primary"/>
+                      </div>
+                </form>
+                        {/* <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
+                              <div className="form-group">
+                                  <input type="submit" value="Show Article" className="btn btn-primary"/>
+                              </div>
+                        </form> */}
+            </td>
         </tr>
     );
   }
