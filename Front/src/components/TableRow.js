@@ -79,9 +79,7 @@ class TableRow extends Component {
                 <div className = "col-lg-6 mt-4" >
                     <div className = "card card-inverse card-info" >
                         <div className="card-header">
-
                                 <img className="avatar" src="https://picsum.photos/30/30/" alt="avatar"></img>
-
                             <div className="float-right d-inline-flex">
                                 {edit}
                                 {remove}
@@ -94,9 +92,6 @@ class TableRow extends Component {
 
                         </div>
                         <div className = "card-block" >
-                            <figure className = "profile profile-inline" >
-
-                            </figure>
                             <div className = "card-text m-3" >
                                 {this.props.obj.description}
                             </div>
