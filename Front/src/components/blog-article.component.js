@@ -12,12 +12,16 @@ export default class Articles extends React.Component {
             articles: [],
             login : '',
             id:'',
-            date: ''
+            date: '',
+            time: new Date().toLocaleTimeString()
         };
         this.getAlert = this.getAlert.bind(this);
     }
     
     componentDidMount(){
+          setInterval(() => {
+            this.setState({ time: new Date().toLocaleTimeString() })    
+          }, 1000)
           const token = localStorage.usertoken;
           if(!token){
               this.props.history.push('/login')
@@ -37,6 +41,10 @@ export default class Articles extends React.Component {
                       console.log(error);
                   })
           }
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.interval);
       }
 
       tab(){
