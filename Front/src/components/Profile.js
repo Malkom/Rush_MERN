@@ -1,6 +1,7 @@
 import  React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+import imgHead from '../img/native-american-skull.png';
 
 class Profile extends Component {
     constructor() {
@@ -22,13 +23,24 @@ class Profile extends Component {
         }
         else {
 
-            const decoded = jwt_decode(token);
+            let decoded = jwt_decode(token);
             this.setState({
                 login : decoded.login,
                 email: decoded.email,
                 id: decoded._id
             })
         }
+
+        axios.get('http://localhost:4242/follow', {params: {id: this.state.id}})
+                  .then(response => {
+                      console.log(response.data);
+                      this.setState({articles: response.data});
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                  })
+
+
     }
 
     onSubmit(e) {
@@ -57,35 +69,40 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className="container">
-                 <div className="jumbotron mt-5">
-                    <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center"> Your profile </h1>
+                <div className="row">
+                    <img id="profile" className="bg" src={imgHead} alt="Logo"></img>
+                    <div className='col-lg-3'>
+                    <div className="jumbotron ml-3 mt-5">
+                            <div className="col-sm-8 mx-auto">
+                                <h1 className="text-center"> Your profile </h1>
+                            </div>
+                                <table className="table col-md-6 mx-auto">
+                                    <tbody>
+                                        <tr>
+                                            <td>Login</td>
+                                            <td>{this.state.login}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{this.state.email}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <form action={"/" + this.state.login + "/edit_profile"}>
+                                    <div className="form-group">
+                                        <input type="submit" value="Edit Profile" className="btn btn-primary"/>
+                                    </div>
+                                </form>
+                                <form onSubmit={this.onSubmit}>
+                                    <div className="form-group">
+                                        <input type="submit" value="Delete Profile" className="btn btn-primary"/>
+                                    </div>
+                                </form>
+                        </div>
                     </div>
-                        <table className="table col-md-6 mx-auto">
-                            <tbody>
-                                <tr>
-                                    <td>Login</td>
-                                    <td>{this.state.login}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td>{this.state.email}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <form action={"/" + this.state.login + "/edit_profile"}>
-                            <div className="form-group">
-                                <input type="submit" value="Edit Profile" className="btn btn-primary"/>
-                            </div>
-                        </form>
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <input type="submit" value="Delete Profile" className="btn btn-primary"/>
-                            </div>
-                        </form>
-                </div>
-            </div>   
+                    <div className='col-lg-6'></div>
+                    <div className='col-lg-3'></div>
+                </div>  
         )        
 
     }
