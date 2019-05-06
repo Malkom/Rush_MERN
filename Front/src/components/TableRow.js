@@ -4,20 +4,21 @@ import back_logo from "../img/Back_Arrow.svg";
 let dateFormat = require('dateformat');
 
 class TableRow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      login : '', 
-      email : '',
-        date : '', 
-        idCreator: ""
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            login : '',
+            email : '',
+            date : '',
+            idCreator: '',
+            author_name: ''
+        };
   }
-  componentDidMount(){
 
-    const token = localStorage.usertoken
-    const decoded = jwt_decode(token)
+
+  componentDidMount(){
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
     this.setState({
         login : decoded.login,
         email : decoded.email,
@@ -29,8 +30,8 @@ class TableRow extends Component {
     if(this.props.obj.idCreator === this.state.id)
     {
       edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
-                <div className="form-group">
-                  <input type="submit" value="Edit Article" className="btn btn-primary"/>
+                <div className="form-group mx-3">
+                  <input type="submit" value="Edit Article" className="btn btn-primary btn-sm"/>
                 </div>
               </form>
               )
@@ -42,19 +43,14 @@ class TableRow extends Component {
                 <div className = "col-lg-6 mt-4" >
                     <div className = "card card-inverse card-info" >
                         <div className="card-header">
-                            <button
-                                className="btn btn-primary float-left btn-sm backButton">
-                                <img src={back_logo} width='20' height='20' alt="Back"></img>
-                            </button>
+
+                                <img className="avatar" src="https://picsum.photos/30/30/" alt="avatar"></img>
+
                             <div className="float-right d-inline-flex">
-                                <form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
-                                    <div className="form-group mx-3">
-                                        <input type="submit" value="Edit Article" className="btn btn-primary"/>
-                                    </div>
-                                </form>
+                                {edit}
                                 <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
                                     <div className="form-group">
-                                        <input type="submit" value="Show Article" className="btn btn-primary"/>
+                                        <input type="submit" value="Show Article" className="btn btn-primary btn-sm"/>
                                     </div>
                                 </form>
                             </div>

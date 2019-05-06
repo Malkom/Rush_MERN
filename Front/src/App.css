@@ -147,6 +147,11 @@ h5 {
   color: rgba(0, 0, 0, .87);
 }
 
-.backButton:before{
+.backButton:before {
   background-image: url("/img/Back_Arrow.svg");
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
 }
