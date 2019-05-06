@@ -12,7 +12,8 @@ export default class Articles extends React.Component {
             articles: [],
             login : '',
             id:'',
-            date: ''
+            date: '',
+            time: new Date().toLocaleTimeString()
         };
         this.getAlert = this.getAlert.bind(this);
     }

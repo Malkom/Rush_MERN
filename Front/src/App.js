@@ -12,6 +12,7 @@ import blogAdd_Article from "./components/blog-add_article.component";
 import blogEdit_Article from "./components/blog-edit_article.component";
 import blogShow_Article from "./components/blog-show_article.component";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import MemberList from './components/MemberList';
@@ -34,7 +35,8 @@ function App() {
         <Route path="/:user/add_article" component={blogAdd_Article}/>
         <Route path="/:user/edit_article/:id" component={blogEdit_Article}/>
         <Route path="/:user/show_article/:id" component={blogShow_Article}/>
-      </Router>
+      <Footer/>  
+    </Router>
   )
 }
 
