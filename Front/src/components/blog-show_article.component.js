@@ -1,7 +1,6 @@
 import back_logo from "../img/Back_Arrow.svg";
 import React from 'react';
 import axios from 'axios';
-import logo from "../indian-headdress.png";
 let dateFormat = require('dateformat');
 
 

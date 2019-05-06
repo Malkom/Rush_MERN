@@ -37,8 +37,7 @@ export default class Articles extends React.Component {
         });
 
     }
-      
-  
+
       render() {
         return (
             <div className="container">
@@ -47,17 +46,7 @@ export default class Articles extends React.Component {
                     <input type="submit" value="Add Message" className="btn btn-primary"/>
                 </div>
             </form>
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <td><strong>Description</strong></td>
-                      <td><strong>Last Updated</strong></td>
-                  </tr>
-                </thead>
-                <tbody>
                     {this.tab()}
-                </tbody>
-              </table>
           </div>
           );
     }
