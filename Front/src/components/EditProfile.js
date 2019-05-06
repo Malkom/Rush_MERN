@@ -1,19 +1,18 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import {register} from './UserFunctions';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-function validate(register) {
+function validate(user) {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
   
-    if (register.name.length < 2 || register.name.length > 20) {
+    if (user.name.length < 2 || user.name.length > 20) {
       errors.push("Name must be between 2 and 20 characters");
     }
   
-    if (register.password !== register.confPass) {
+    if (user.password !== user.confPass) {
       errors.push("Password did not match confirmation");
     }
   
@@ -87,8 +86,9 @@ export default class EditUser extends React.Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
+            confPass: this.state.confPass,
         }
-        const errors = validate(register);
+        const errors = validate(user);
         if (errors.length > 0) {
             this.setState({ errors });
             return;
@@ -142,11 +142,11 @@ export default class EditUser extends React.Component {
                             ))}  
                         <div className="form-group">
                             <label>Name:  </label>
-                            <input type="text" className="form-control" value={this.state.login} onChange={this.onChangeName}/>
+                            <input type="text" className="form-control" value={this.state.name} placeholder={this.state.login} onChange={this.onChangeName}/>
                         </div>
                         <div className="form-group">
                             <label>Email: </label>
-                            <input type="email" className="form-control" value={this.state.token_email} onChange={this.onChangeEmail}/>
+                            <input type="email" className="form-control" value={this.state.email} placeholder={this.state.token_email} onChange={this.onChangeEmail}/>
                         </div>
                         <div className="form-group">
                             <label>Password: </label>

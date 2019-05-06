@@ -156,3 +156,12 @@ h5 {
   height: 100%;
   border-radius: 50%;
 }
+
+footer{
+  bottom: 0px;
+}
+
+#text-center
+{
+    text-align: center !important;
+}

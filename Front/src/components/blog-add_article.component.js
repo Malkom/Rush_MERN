@@ -17,13 +17,6 @@ export default class AddArticle extends React.Component {
             login : '', 
         }
     }
-
-    /* handleChange (event) {
-        this.setState({
-          
-        });
-      } */
-
     componentDidMount(){
         const token = localStorage.usertoken;
         if(!token){
@@ -39,7 +32,6 @@ export default class AddArticle extends React.Component {
     }
 
     handleKeyPress(e) {
-        //var value = e.currentTarget.value.split(' ');
         console.log(this.state.length);
         if (this.state.length > 140) {
             e.preventDefault();

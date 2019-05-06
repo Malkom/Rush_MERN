@@ -31,7 +31,7 @@ export default class AddArticle extends React.Component {
 
         axios.get('http://localhost:4242/article/display', {params: {id: this.props.match.params.id}})
             .then(response => {
-                console.log(response.data);
+                console.log(response.data.description);
                 this.setState({
                     description: response.data.description
                 });
