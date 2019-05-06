@@ -8,7 +8,8 @@ class TableRow extends Component {
     this.state = {
       login : '', 
       email : '',
-        date : ''
+        date : '', 
+        idCreator: ""
     };
 
   }
@@ -18,10 +19,21 @@ class TableRow extends Component {
     const decoded = jwt_decode(token)
     this.setState({
         login : decoded.login,
-        email : decoded.email
+        email : decoded.email,
+        id: decoded._id
     });
   }
   render() {
+    let edit;
+    if(this.props.obj.idCreator === this.state.id)
+    {
+      edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
+                <div className="form-group">
+                  <input type="submit" value="Edit Article" className="btn btn-primary"/>
+                </div>
+              </form>
+              )
+    }
     return (
         <tr>
           <td>
@@ -31,11 +43,7 @@ class TableRow extends Component {
                 { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") } hour(s) ago
             </td>
           <td className="">
-            <form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
-                  <div className="form-group">
-                      <input type="submit" value="Edit Article" className="btn btn-primary"/>
-                  </div>
-            </form>
+                {edit}
             <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
                   <div className="form-group">
                       <input type="submit" value="Show Article" className="btn btn-primary"/>
