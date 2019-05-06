@@ -59,12 +59,12 @@ export default class EditUser extends React.Component {
 
     onChangeName(e) {
         this.setState({
-            name: e.target.value
+            login: e.target.value
         });
     }
     onChangeEmail(e) {
         this.setState({
-            email: e.target.value
+            token_email: e.target.value
         });
     }
     onChangePassword(e) {
@@ -83,8 +83,8 @@ export default class EditUser extends React.Component {
         
         const user = {
             id: this.state.id,
-            name: this.state.name,
-            email: this.state.email,
+            name: this.state.login,
+            email: this.state.token_email,
             password: this.state.password,
             confPass: this.state.confPass,
         }
@@ -142,11 +142,11 @@ export default class EditUser extends React.Component {
                             ))}  
                         <div className="form-group">
                             <label>Name:  </label>
-                            <input type="text" className="form-control" value={this.state.name} placeholder={this.state.login} onChange={this.onChangeName}/>
+                            <input type="text" className="form-control" value={this.state.login} onChange={this.onChangeName}/>
                         </div>
                         <div className="form-group">
                             <label>Email: </label>
-                            <input type="email" required className="form-control" value={this.state.email} placeholder={this.state.token_email} onChange={this.onChangeEmail}/>
+                            <input type="email" required className="form-control" value={this.state.token_email} placeholder={this.state.token_email} onChange={this.onChangeEmail}/>
                         </div>
                         <div className="form-group">
                             <label>Password: </label>
