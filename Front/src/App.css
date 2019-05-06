@@ -169,6 +169,12 @@ footer{
   top: 50px;
 }
 
+#profile{
+  width: 30%;
+  top: 90px;
+}
+
+
 .user{
   margin-left: 100px;
 }
