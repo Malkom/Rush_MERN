@@ -68,11 +68,6 @@ export default class AddArticle extends React.Component {
             console.log(response.data)
             if(response.data.message === "Successful")
             {
-                /* this.props.authenticate({
-                    name: this.state.name,
-                    email: this.state.email,
-                    isLoggedIn: true
-                }); */
                 this.setState({
                     wrong: '',
                     fireRedirect: true

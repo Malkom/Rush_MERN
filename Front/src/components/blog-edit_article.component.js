@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 import jwt_decode from 'jwt-decode';
+import Textarea from './Textarea';
+import Counter from './Counter';
 
 export default class AddArticle extends React.Component {
     constructor(props) {
@@ -39,11 +41,24 @@ export default class AddArticle extends React.Component {
             });
     }
 
+    handleKeyPress(e) {
+        //var value = e.currentTarget.value.split(' ');
+        console.log(this.state.length);
+        if (this.state.length > 140) {
+            e.preventDefault();
+            e.stopPropagation();
+        } else {
+            //console.log(value);
+        }
+    }
+
     onChangeDescription(e) {
         this.setState({
-            description: e.target.value
+            description: e.target.value,
+            length: e.target.value.length
         });
     }
+    
     onSubmit(e) {
         e.preventDefault();
         
@@ -56,11 +71,6 @@ export default class AddArticle extends React.Component {
             console.log(response.data);
             if(response.data.message === "Successful")
             {
-                /* this.props.authenticate({
-                    name: this.state.name,
-                    email: this.state.email,
-                    isLoggedIn: true
-                }); */
                 this.setState({
                     wrong: '',
                     fireRedirect: true
@@ -92,9 +102,9 @@ export default class AddArticle extends React.Component {
                 <p>{this.state.wrong}</p>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <label>Description: </label>
-                            <textarea style={{height: 200, width: 550}}
-                            type="text" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
+                            <label>Edit your message: </label>
+                            <Textarea value={this.state.description} onChangeDescription={this.onChangeDescription} onKeyPress={ this.handleKeyPress }/>
+                            <Counter length={this.state.length} /> 
                         </div>
                         <div className="form-group">
                             <input type="submit" value="Edit" className="btn btn-primary"/>
