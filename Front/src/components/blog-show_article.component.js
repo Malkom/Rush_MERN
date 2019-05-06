@@ -61,7 +61,7 @@ export default class ShowArticle extends React.Component {
                                     {article.description}
                                 </div>
                             </div>
-                            <div className="card-footer">
+                            <div className="card-text m-3">
                                 <small>
                                     Last updated { dateFormat(new Date() - new Date(article.updated_at), "H") } hour(s) ago
                                 </small>
