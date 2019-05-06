@@ -35,9 +35,10 @@ app.use(bodyParser.json());
 ///Route
 var usersRouter = require('./Routes/users');
 var articlesRouter = require('./Routes/article');
+let followsRouter = require('./Routes/follow');
 app.use('/', usersRouter);
 app.use('/', articlesRouter);
-
+app.use('/', followsRouter);
 
 app.listen(4242);
 module.exports = app;
