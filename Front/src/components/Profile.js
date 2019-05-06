@@ -2,6 +2,7 @@ import  React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import imgHead from '../img/native-american-skull.png';
+import TableFollower from './TableFollower';
 
 class Profile extends Component {
     constructor() {
@@ -13,6 +14,7 @@ class Profile extends Component {
             email:'', 
             wrong: '',
             id: '',
+            result:[]
         }
     }
     
@@ -29,18 +31,24 @@ class Profile extends Component {
                 email: decoded.email,
                 id: decoded._id
             })
-        }
-
-        axios.get('http://localhost:4242/follow', {params: {id: this.state.id}})
+            console.log(decoded._id);
+            axios.get('http://localhost:4242/follow', {params: {id: decoded._id}})
                   .then(response => {
                       console.log(response.data);
-                      this.setState({articles: response.data});
+                      this.setState({result: response.data});
                   })
                   .catch(function (error) {
                       console.log(error);
                   })
 
+        }
 
+    }
+
+    tab(){
+        return this.state.result.map(function(object, i){
+            return <TableFollower obj={object} key={i} />;
+        });
     }
 
     onSubmit(e) {
@@ -100,8 +108,19 @@ class Profile extends Component {
                                 </form>
                         </div>
                     </div>
-                    <div className='col-lg-6'></div>
-                    <div className='col-lg-3'></div>
+                    <div className='col-lg-5'>
+                        <table className="table table-striped">
+                            <thead>
+                                <tr className="row">
+                                    <td className="col-lg-4"><strong>Follows</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.tab()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className='col-lg-4'></div>
                 </div>  
         )        
 

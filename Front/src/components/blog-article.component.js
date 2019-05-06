@@ -66,7 +66,7 @@ export default class Articles extends React.Component {
                     <input type="submit" value="Add Message" className="btn btn-primary"/>
                 </div>
             </form>
-                    {this.tab()}
+            {this.tab()}
         </div>
           );
     }

@@ -25,7 +25,7 @@ router.post('/follow', (request, response) => {
 })
 
 router.get('/follow', (request, response) => {
-    let query = {id_follower: request.body.id};
+    let query = {id_follower: request.query.id};
     console.log(query);
     follow.find(query, function(err, followers){
         console.log(followers);
