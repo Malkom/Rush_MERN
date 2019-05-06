@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../indian-headdress.png";
+import logo from "../img/indian-headdress.png";
 import jwt_decode from 'jwt-decode'
 
 
