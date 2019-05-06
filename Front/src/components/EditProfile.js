@@ -146,7 +146,7 @@ export default class EditUser extends React.Component {
                         </div>
                         <div className="form-group">
                             <label>Email: </label>
-                            <input type="email" className="form-control" value={this.state.email} placeholder={this.state.token_email} onChange={this.onChangeEmail}/>
+                            <input type="email" required className="form-control" value={this.state.email} placeholder={this.state.token_email} onChange={this.onChangeEmail}/>
                         </div>
                         <div className="form-group">
                             <label>Password: </label>

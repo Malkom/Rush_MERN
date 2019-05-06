@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import jwt_decode from 'jwt-decode';
 import Textarea from './Textarea';
 import Counter from './Counter';
+import imgBack from '../img/indian-village.png';
 
 export default class AddArticle extends React.Component {
     constructor(props) {
