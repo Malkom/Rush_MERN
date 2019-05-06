@@ -7,7 +7,8 @@ user = require('../Models/users');
 process.env.SECRET_KEY = 'secret';
 
 router.get('/users/findUsers', (request, response) => {
-    user.find({}, function(err, users){
+    let param = request.query.email;
+    user.find({ email: { $ne: param } }, function(err, users){
         //console.log(users);
         if(err) console.log(err);
         else{
