@@ -14,6 +14,7 @@ export default class Articles extends React.Component {
             id:'',
             date: ''
         };
+        this.getAlert = this.getAlert.bind(this);
     }
     
     componentDidMount(){
@@ -46,11 +47,9 @@ export default class Articles extends React.Component {
       }
 
       getAlert(key){
-        ;
-        var array = [...this.state.articles]; // make a separate copy of the array
-        var index = array.indexOf(key)
-        if (index !== -1) {
-          array.splice(index, 1);
+        var array = [...this.state.articles]; // make a separate copy of the arra
+        if (key !== -1) {
+          array.splice(key, 1);
           this.setState({articles: array});
         }
       }
