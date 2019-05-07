@@ -21,7 +21,12 @@ let userSchema = mongoose.Schema({
     admin :{
         type : Boolean,
         default : false
-    }
+    },
+    follows:[{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "Follow",
+        unique: true
+    }]
 });
 
 const user = module.exports = mongoose.model('user', userSchema);

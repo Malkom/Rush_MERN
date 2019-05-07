@@ -53,7 +53,7 @@ class TableFollower extends Component {
     return (
         <tr className="row">
             <td className="col-lg-8">
-                {this.props.obj.leader_id}
+                {this.props.obj.id_leader}
             </td>
             <td className="col-lg-4">
                 <form onSubmit={this.onFollow}>

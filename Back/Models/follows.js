@@ -6,12 +6,12 @@ let followsSchema = mongoose.Schema({
         ref: 'user',
         required: true,
     },
-    id_leader : {
+    id_leader : [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required: true,
         unique: true
-    }
+    }]
 });
 
 const Follow = mongoose.model('Follow', followsSchema);
