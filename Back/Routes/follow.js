@@ -8,7 +8,7 @@ router.post('/follow', (request, response) => {
     const follower = request.body.user_id;
     const leader = request.body.leader_id;
 
-    user.findOneAndUpdate({_id: follower}, {$push: {follows: leader}}, {upsert: true}, function(err){
+    user.findOneAndUpdate({_id: follower}, {$addToSet: {follows: leader}}, {upsert: true}, function(err){
         if(err){
             console.log(err);
         }
@@ -33,14 +33,14 @@ router.post('/follow', (request, response) => {
 router.get('/follow', (request, response) => {
     let query = {id_follower: request.query.id};
     console.log(query);
-    follow.find(query).populate('id_leader', function(err, followers){
+    follow.find(query, function(err, followers){
         console.log(followers);
         if(err){
             console.log(err);
         }
         else {
-            console.log(follow.id_leader.login);
-            //response.json(followers);
+            //console.log(follow.id_leader.login);
+            response.json(followers);
         }
     })
 })
