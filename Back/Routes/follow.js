@@ -32,17 +32,19 @@ router.post('/follow', (request, response) => {
 
 router.get('/follow', (request, response) => {
     let query = {id_follower: request.query.id};
-    console.log(query);
-    follow.find(query, function(err, followers){
-        console.log(followers);
+    follow.find(query)
+    .select('id_leader')
+    .populate('id_leader') // multiple path names in one requires mongoose >= 3.6
+    .exec(function(err, usersDocuments) {
         if(err){
             console.log(err);
         }
-        else {
-            //console.log(follow.id_leader.login);
-            response.json(followers);
+        else
+        {
+            console.log('%j', usersDocuments);
+            response.json(usersDocuments);
         }
-    })
+    });
 })
 
 module.exports = router;

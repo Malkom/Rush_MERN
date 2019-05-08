@@ -5,7 +5,7 @@ import axios from 'axios';
 class TableFollower extends Component {
     constructor(props) {
         super(props);
-        this.onFollow = this.onFollow.bind(this);
+        //this.onFollow = this.onFollow.bind(this);
 
         this.state = {
             user_id: '',
@@ -24,7 +24,7 @@ class TableFollower extends Component {
     })
   }
 
-  onFollow(e){
+  /* onFollow(e){
       e.preventDefault();
       console.log(this.state.login);
       console.log(this.props.obj._id);
@@ -47,14 +47,14 @@ class TableFollower extends Component {
           .catch((error) => {
               console.error(error);
           });
-  }
+  } */
 
   render() {
     return (
         <tr className="row">
-            <td className="col-lg-8">
-                {this.props.obj.id_leader}
-            </td>
+            {this.props.obj.id_leader.map(item => (
+            <td className="col-lg-8" key={item}>{item.login} </td>
+          ))}
             <td className="col-lg-4">
                 <form onSubmit={this.onFollow}>
                       <div className="form-group">

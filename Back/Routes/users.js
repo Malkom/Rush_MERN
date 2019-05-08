@@ -90,6 +90,7 @@ router.post('/users/register', (request, response) => {
 
     newUser.save((err)=> {
         if(err){
+            console.log(err);
             response.send(JSON.stringify({
                 //extra: data,
                 message: "Error registration"

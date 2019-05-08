@@ -46,9 +46,9 @@ class Profile extends Component {
     }
 
     tab(){
-        return this.state.result.map(function(object, i){
-            return <TableFollower obj={object} key={i} />;
-        });
+        return this.state.result.map(function(object, key){
+            return <TableFollower obj={object} key={key}/>;
+        })
     }
 
     onSubmit(e) {

@@ -25,7 +25,6 @@ let userSchema = mongoose.Schema({
     follows:[{
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Follow",
-        unique: true
     }]
 });
 
