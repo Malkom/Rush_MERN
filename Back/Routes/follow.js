@@ -57,7 +57,7 @@ router.get('/leader', (request, response) => {
             }
             else
             {
-                user.find({_id : { $in : Leaders[0].follows} })
+                user.find({ _id : { $in : Leaders[0].follows } })
                     .select('login')
                     // .select("-password")
                     .exec(function(err, usersLeaders) {

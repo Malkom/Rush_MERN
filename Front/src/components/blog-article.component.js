@@ -27,12 +27,13 @@ export default class Articles extends React.Component {
           else {
               const decoded = jwt_decode(token);
               this.setState({
-                  login: decoded.login
+                  login: decoded.login,
+                  id : decoded._id
               });
 
-              axios.get('http://localhost:4242/articles')
+              axios.get('http://localhost:4242/articles', { params : { id: decoded._id }})
                   .then(response => {
-                      console.log(response.data);
+                      // console.log(response.data);
                       this.setState({articles: response.data});
                   })
                   .catch(function (error) {

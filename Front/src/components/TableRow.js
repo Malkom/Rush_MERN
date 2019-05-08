@@ -54,7 +54,6 @@ class TableRow extends Component {
 }
 
   render() {
-    console.log('Render');
     let edit;
     let remove;
     if(this.props.obj.idCreator === this.state.id)
