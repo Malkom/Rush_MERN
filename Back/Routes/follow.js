@@ -28,7 +28,7 @@ router.post('/follow', (request, response) => {
             }
         })
     }) 
-})
+});
 
 router.get('/follow', (request, response) => {
     let query = {id_follower: request.query.id};
@@ -41,10 +41,42 @@ router.get('/follow', (request, response) => {
         }
         else
         {
-            console.log('%j', usersDocuments);
+            // console.log('%j', usersDocuments);
             response.json(usersDocuments);
         }
     });
-})
+});
+
+router.get('/leader', (request, response) => {
+    let query = {id_leader: request.query.id};
+    follow.find(query)
+        // .select('id_follower')
+        // .populate('id_follower') // multiple path names in one requires mongoose >= 3.6
+        .exec(function(err, Leaders) {
+            if(err){
+                console.log(err);
+            }
+            else
+            {
+                console.log(Leaders);
+                console.log(Leaders[0].id_leader);
+                user.find({_id : { $in : Leaders[0].id_leader} })
+                    .select("-follows")
+                    .select("-password")
+                    .exec(function(err, usersLeaders) {
+                        if(err){
+                            console.log(err);
+                        }
+                        else {
+                            console.log(usersLeaders);
+                            // console.log(usersLeaders[0].login);
+                            response.json(usersLeaders);
+                        }
+                    })
+
+
+            }
+        });
+});
 
 module.exports = router;

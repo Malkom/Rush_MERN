@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import imgHead from '../img/native-american-skull.png';
 import TableFollower from './TableFollower';
+import TableLeader from './TableLeader';
 
 class Profile extends Component {
     constructor() {
@@ -32,14 +33,26 @@ class Profile extends Component {
                 id: decoded._id
             })
             console.log(decoded._id);
+
+            // REQUETE POUR RECUPERER LES FOLLOWERS //
             axios.get('http://localhost:4242/follow', {params: {id: decoded._id}})
                   .then(response => {
-                      console.log(response.data);
+                      console.log('Response.data de get follow : ' + response.data);
                       this.setState({result: response.data});
                   })
                   .catch(function (error) {
                       console.log(error);
-                  })
+                  });
+
+            // REQUETE POUR RECUPERER LES LEADERS //
+            axios.get('http://localhost:4242/leader', {params: {id: decoded._id}})
+                .then(response => {
+                    console.log('Response.data de get leader : ' + response.data);
+                    this.setState({leader: response.data});
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
 
         }
 
@@ -50,6 +63,15 @@ class Profile extends Component {
             return <TableFollower obj={object} key={key}/>;
         })
     }
+
+    // tabLeader(){
+    //     console.log(this.state.leader);
+    //     return this.state.leader.map(function(object, key){
+    //         return <TableLeader obj={object} key={key}/>;
+    //     })
+    // }
+
+
 
     onSubmit(e) {
         e.preventDefault();
@@ -120,7 +142,18 @@ class Profile extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className='col-lg-4'></div>
+                    <div className='col-lg-4'>
+                        <table className="table table-striped">
+                            <thead>
+                            <tr className="row">
+                                <td className="col-lg-4"><strong>Followed by</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {/*{this.tabLeader()}*/}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>  
         )        
 
