@@ -2,6 +2,7 @@ import  React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import imgHead from '../img/native-american-skull.png';
+import anonyme from '../img/anonyme.jpeg';
 import TableFollower from './TableFollower';
 
 class Profile extends Component {
@@ -82,7 +83,7 @@ class Profile extends Component {
                     <div className='col-lg-3'>
                     <div className="jumbotron ml-3 mt-5">
                             <div className="col-sm-8 mx-auto">
-                                <h1 className="text-center"> Your profile </h1>
+                            <img id="img_profile" src={anonyme} alt="Profile image"></img>
                             </div>
                                 <table className="table col-md-6 mx-auto">
                                     <tbody>
