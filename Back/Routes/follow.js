@@ -48,28 +48,23 @@ router.get('/follow', (request, response) => {
 });
 
 router.get('/leader', (request, response) => {
-    let query = {id_leader: request.query.id};
-    follow.find(query)
-        // .select('id_follower')
-        // .populate('id_follower') // multiple path names in one requires mongoose >= 3.6
+    let query = {_id: request.query.id};
+    user.find(query)
+        .select('follows')
         .exec(function(err, Leaders) {
             if(err){
                 console.log(err);
             }
             else
             {
-                console.log(Leaders);
-                console.log(Leaders[0].id_leader);
-                user.find({_id : { $in : Leaders[0].id_leader} })
-                    .select("-follows")
-                    .select("-password")
+                user.find({_id : { $in : Leaders[0].follows} })
+                    .select('login')
+                    // .select("-password")
                     .exec(function(err, usersLeaders) {
                         if(err){
                             console.log(err);
                         }
                         else {
-                            console.log(usersLeaders);
-                            // console.log(usersLeaders[0].login);
                             response.json(usersLeaders);
                         }
                     })

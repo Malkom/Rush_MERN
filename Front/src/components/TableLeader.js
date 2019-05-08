@@ -12,12 +12,11 @@ class TableLeader extends Component {
     }
 
     render() {
-        console.log(this.props.obj.id_leader);
         return (
             <tr className="row">
-                {this.props.obj.id_leader.map(item => (
-                    <td className="col-lg-8" key={item}>{item.login} </td>
-                ))}
+
+                    <td className="col-lg-8"> {this.props.obj.login} </td>
+
                 {/*<td className="col-lg-4">*/}
                 {/*    <form onSubmit={this.onFollow}>*/}
                 {/*        <div className="form-group">*/}

@@ -16,7 +16,8 @@ class Profile extends Component {
             email:'', 
             wrong: '',
             id: '',
-            result:[]
+            result: [],
+            leader: []
         }
     }
     
@@ -26,19 +27,17 @@ class Profile extends Component {
             this.props.history.push('/login')
         }
         else {
-
             let decoded = jwt_decode(token);
             this.setState({
                 login : decoded.login,
                 email: decoded.email,
                 id: decoded._id
-            })
-            console.log(decoded._id);
+            });
 
             // REQUETE POUR RECUPERER LES FOLLOWERS //
             axios.get('http://localhost:4242/follow', {params: {id: decoded._id}})
                   .then(response => {
-                      console.log('Response.data de get follow : ' + response.data);
+                      console.log('Response.data de get follow : ', response.data);
                       this.setState({result: response.data});
                   })
                   .catch(function (error) {
@@ -48,7 +47,7 @@ class Profile extends Component {
             // REQUETE POUR RECUPERER LES LEADERS //
             axios.get('http://localhost:4242/leader', {params: {id: decoded._id}})
                 .then(response => {
-                    console.log('Response.data de get leader : ' + response.data);
+                    console.log('Response.data de get leader : ', response.data);
                     this.setState({leader: response.data});
                 })
                 .catch(function (error) {
@@ -65,12 +64,12 @@ class Profile extends Component {
         })
     }
 
-    // tabLeader(){
-    //     console.log(this.state.leader);
-    //     return this.state.leader.map(function(object, key){
-    //         return <TableLeader obj={object} key={key}/>;
-    //     })
-    // }
+    tabLeader(){
+        // console.log(this.state.leader);
+        return this.state.leader.map(function(object, key){
+            return <TableLeader obj={object} key={key}/>;
+        })
+    }
 
 
 
@@ -105,7 +104,7 @@ class Profile extends Component {
                     <div className='col-lg-3'>
                     <div className="jumbotron ml-3 mt-5">
                             <div className="col-sm-8 mx-auto">
-                            <img id="img_profile" src={anonyme} alt="Profile image"></img>
+                            <img id="img_profile" src={anonyme} alt="Profile_image"></img>
                             </div>
                                 <table className="table col-md-6 mx-auto">
                                     <tbody>
@@ -151,7 +150,7 @@ class Profile extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {/*{this.tabLeader()}*/}
+                            {this.tabLeader()}
                             </tbody>
                         </table>
                     </div>
