@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
-import axios from 'axios';
+//import axios from 'axios';
 
 class TableFollower extends Component {
     constructor(props) {
