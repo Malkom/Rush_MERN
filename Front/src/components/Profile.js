@@ -37,7 +37,7 @@ class Profile extends Component {
             // REQUETE POUR RECUPERER LES FOLLOWERS //
             axios.get('http://localhost:4242/follow', {params: {id: decoded._id}})
                   .then(response => {
-                      console.log('Response.data de get follow : ', response.data);
+                      // console.log('Response.data de get follow : ', response.data);
                       this.setState({result: response.data});
                   })
                   .catch(function (error) {
@@ -47,7 +47,7 @@ class Profile extends Component {
             // REQUETE POUR RECUPERER LES LEADERS //
             axios.get('http://localhost:4242/leader', {params: {id: decoded._id}})
                 .then(response => {
-                    console.log('Response.data de get leader : ', response.data);
+                    // console.log('Response.data de get leader : ', response.data);
                     this.setState({leader: response.data});
                 })
                 .catch(function (error) {
@@ -65,7 +65,7 @@ class Profile extends Component {
     }
 
     tabLeader(){
-        // console.log(this.state.leader);
+        console.log(this.state.leader);
         return this.state.leader.map(function(object, key){
             return <TableLeader obj={object} key={key}/>;
         })
@@ -131,7 +131,7 @@ class Profile extends Component {
                         </div>
                     </div>
                     <div className='col-lg-5'>
-                        <table className="table table-striped">
+                        <table className="table table-striped mx-3">
                             <thead>
                                 <tr className="row">
                                     <td className="col-lg-4"><strong>Follows</strong></td>
@@ -143,7 +143,7 @@ class Profile extends Component {
                         </table>
                     </div>
                     <div className='col-lg-4'>
-                        <table className="table table-striped">
+                        <table className="table table-striped mx-3">
                             <thead>
                             <tr className="row">
                                 <td className="col-lg-4"><strong>Followed by</strong></td>

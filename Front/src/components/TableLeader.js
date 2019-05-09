@@ -12,10 +12,10 @@ class TableLeader extends Component {
     }
 
     render() {
+        console.log(this.props.obj.id_follower.login);
         return (
             <tr className="row">
-
-                    <td className="col-lg-8"> {this.props.obj.login} </td>
+                    <td className="col-lg-8"> {this.props.obj.id_follower.login} </td>
 
                 {/*<td className="col-lg-4">*/}
                 {/*    <form onSubmit={this.onFollow}>*/}

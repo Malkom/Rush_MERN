@@ -48,28 +48,18 @@ router.get('/follow', (request, response) => {
 });
 
 router.get('/leader', (request, response) => {
-    let query = {_id: request.query.id};
-    user.find(query)
-        .select('follows')
+    let query = {id_leader : request.query.id};
+    follow.find(query)
+        .select('id_follower')
+        .populate('id_follower', 'login')
         .exec(function(err, Leaders) {
             if(err){
                 console.log(err);
             }
             else
             {
-                user.find({ _id : { $in : Leaders[0].follows } })
-                    .select('login')
-                    // .select("-password")
-                    .exec(function(err, usersLeaders) {
-                        if(err){
-                            console.log(err);
-                        }
-                        else {
-                            response.json(usersLeaders);
-                        }
-                    })
-
-
+                console.log(Leaders);
+                response.json(Leaders);
             }
         });
 });
