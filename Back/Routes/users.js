@@ -17,6 +17,21 @@ router.get('/users/findUsers', (request, response) => {
     });
 })
 
+router.get('/users/findFollowers', (request, response) => {
+    let param = request.query.id;
+    //console.log(param);
+    user.find({ login: param })
+        .select("follows")
+        .exec(function(err, users){
+        //console.log(users);
+        if(err) console.log(err);
+        else{
+            //console.log(users)
+            response.json(users);
+        }    
+    });
+})
+
 router.post('/users/login', (request, response) => {
     let email = request.body.email;
     let password = request.body.password;

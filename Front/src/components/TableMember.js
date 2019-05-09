@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+import SwitchButton from './SwitchButton';
 
 class TableMember extends Component {
     constructor(props) {
         super(props);
         this.onFollow = this.onFollow.bind(this);
+        this.UnFollow = this.UnFollow.bind(this);
 
         this.state = {
             user_id: '',
             login : '',
-            email : ''
+            email : '',
+            followers: [] 
     };
   }
   componentDidMount(){
@@ -22,13 +25,19 @@ class TableMember extends Component {
         login : decoded.login,
         email : decoded.email
     })
+    axios.get('http://localhost:4242/users/findFollowers', {params: {id: decoded.login}})
+                  .then(response => {
+                      //console.log(response.data);
+                      this.setState({followers: response.data[0].follows});
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                  })
   }
 
-  onFollow(e){
-      e.preventDefault();
-      console.log(this.state.login);
-      console.log(this.props.obj._id);
-
+  onFollow(){
+      /* console.log(this.state.login);
+      console.log(this.props.obj._id); */
       const follow = {
           user_id: this.state.user_id,
           leader_id: this.props.obj._id
@@ -49,24 +58,31 @@ class TableMember extends Component {
           });
   }
 
+  UnFollow(idMember){
+    //console.log(idMember);
+    axios.delete('http://localhost:4242/follow', idMember)
+    .then((response) => {
+        if (response.data.message === 'Successful') {
+            alert('You are not following this user.')
+        }
+        else
+        {
+            console.log(response.data);
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+  }
+
   render() {
+    let self = this;
     return (
         <tr className="row">
             <td className="col-lg-8">
             {this.props.obj.login}
             </td>
-            <td className="col-lg-4">
-                <form onSubmit={this.onFollow}>
-                      <div className="form-group">
-                          <input type="submit" value="Follow" className="btn btn-primary"/>
-                      </div>
-                </form>
-                        {/* <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
-                              <div className="form-group">
-                                  <input type="submit" value="Show Article" className="btn btn-primary"/>
-                              </div>
-                        </form> */}
-            </td>
+            <SwitchButton array={this.state.followers} id={this.props.obj._id} follow={self.onFollow} unfollow={self.UnFollow}/>
         </tr>
     );
   }
