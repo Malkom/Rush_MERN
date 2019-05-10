@@ -6,6 +6,7 @@ import SwitchButton from './SwitchButton';
 import jwt_decode from 'jwt-decode';
 import imgBack from '../img/indian-village.png';
 
+
 export default class Articles extends React.Component {
 
     constructor(props) {
@@ -16,7 +17,8 @@ export default class Articles extends React.Component {
             id:'',
             date: '',
             time: new Date().toLocaleTimeString(),
-            followers: []
+            followers: [],
+            search: '' 
         };
         this.SwitchFollowButton = this.SwitchFollowButton.bind(this);
         this.getAlert = this.getAlert.bind(this);

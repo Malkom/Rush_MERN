@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
+import ReactHashtag from "react-hashtag";
 //import { Redirect } from 'react-router';
 let dateFormat = require('dateformat');
 
@@ -10,14 +11,15 @@ class TableRow extends Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
-        //this.tooglefollow = this.tooglefollow.bind(this);
+        //this.Search = this.Search.bind(this);
         this.state = {
             login : '',
             email : '',
             date : '',
             idCreator: '',
             idArticle: '',
-            fireRedirect: false
+            fireRedirect: false,
+            hashsearch: this.props.hashvalue
         };
   }
 
@@ -34,7 +36,7 @@ class TableRow extends Component {
 
     axios.get('http://localhost:4242/users/findOneByIdCreator', { params : { id: this.props.obj.idCreator }})
                   .then(response => {
-                      console.log(response.data.login);
+                      //console.log(response.data.login);
                       this.setState({
                         result: response.data.login,
                       })
@@ -68,10 +70,13 @@ class TableRow extends Component {
     });
 }
 
+    Search(value) {
+        alert("searching the Hashtag : " + value)
+    }
+
   render() {
     let edit;
     let remove;
-    console.log(this.props.obj.idCreator);
     if(this.props.obj.idCreator === this.state.id)
     {
       edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
@@ -109,7 +114,12 @@ class TableRow extends Component {
                         </div>
                         <div className = "card-block" >
                             <div className = "card-text m-3" >
+                            <ReactHashtag renderHashtag={(hashtagValue) => (
+                                <button className="hashtag" value = {hashtagValue} onClick={this.Search.bind(this, hashtagValue)}>
+                                    <ReactHashtag >{hashtagValue}</ReactHashtag>
+                                </button>)}>
                                 {this.props.obj.description}
+                            </ReactHashtag>
                             </div>
                         </div>
                         <div className="card-text mx-3">
