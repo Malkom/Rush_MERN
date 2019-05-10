@@ -32,13 +32,15 @@ app.use(session({secret: 'ssshhhhh'}));
 app.use(bodyParser.urlencoded({ extend: true}));
 app.use(bodyParser.json());
 
-///Route
-var usersRouter = require('./Routes/users');
-var articlesRouter = require('./Routes/article');
+/// Routes
+let usersRouter = require('./Routes/users');
+let articlesRouter = require('./Routes/article');
 let followsRouter = require('./Routes/follow');
+let banRouter = require('./Routes/ban');
 app.use('/', usersRouter);
 app.use('/', articlesRouter);
 app.use('/', followsRouter);
+app.use('/', banRouter);
 
 app.listen(4242);
 module.exports = app;
