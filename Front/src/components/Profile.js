@@ -71,7 +71,6 @@ class Profile extends Component {
         })
     }
 
-<<<<<<< HEAD
     UpdateList(key){
         var array = [...this.state.result]; // make a separate copy of the arra
         if (key !== -1) {
@@ -82,8 +81,6 @@ class Profile extends Component {
 
 
 
-=======
->>>>>>> 16c378d897b2581f1b33074f5931c6dd4ef5df58
     onSubmit(e) {
         e.preventDefault();
         //console.log(typeof this.state.id);
