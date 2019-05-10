@@ -48,13 +48,15 @@ class TableFollower extends Component {
               console.error(error);
           });
   } */
+  /* {this.props.obj.id_leader.map(item => (
+    <td className="col-lg-8" key={item}>{item.login} </td>
+  ))} */
 
   render() {
+      console.log();
     return (
         <tr className="row">
-            {this.props.obj.id_leader.map(item => (
-            <td className="col-lg-8" key={item}>{item.login} </td>
-          ))}
+            <td>{this.props.obj.id_leader.login}</td>
             <td className="col-lg-4">
                 <form onSubmit={this.onFollow}>
                       <div className="form-group">

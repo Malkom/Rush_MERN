@@ -30,7 +30,7 @@ export default class MemberList extends React.Component {
 
               axios.get('http://localhost:4242/users/findUsers', {params: {email: decoded.email}})
                   .then(response => {
-                      console.log(response.data);
+                      //console.log(response.data);
                       this.setState({users: response.data});
                   })
                   .catch(function (error) {
