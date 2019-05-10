@@ -11,6 +11,7 @@ class Profile extends Component {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
         this.UpdateList = this.UpdateList.bind(this);
+        this.UpdateLeaders = this.UpdateLeaders.bind(this);
 
         this.state = {
             login : '',
@@ -65,23 +66,32 @@ class Profile extends Component {
     }
 
     tabLeader(){
-        // console.log(this.state.leader);
-        return this.state.leader.map(function(object, key){
-            return <TableLeader obj={object} key={key} />;
+        let self = this;
+        return this.state.leader.map(function(object, i){
+            return <TableLeader obj={object} key={i} var={i} update={self.UpdateLeaders}/>;
         })
     }
 
     UpdateList(key){
-        var array = [...this.state.result]; // make a separate copy of the arra
+        let array = [...this.state.result]; // make a separate copy of the array
         if (key !== -1) {
           array.splice(key, 1);
           this.setState({result: array});
         }
       }
 
+    UpdateLeaders(key){
+        let array = [...this.state.leader]; // make a separate copy of the array Leaders
+        if (key !== -1) {
+            array.splice(key, 1);
+            this.setState({leader: array});
+        }
+            }
 
 
-    onSubmit(e) {
+
+
+        onSubmit(e) {
         e.preventDefault();
         //console.log(typeof this.state.id);
         //let string_id = JSON.stringify(this.state.id);

@@ -8,13 +8,19 @@ router.post('/ban', (request, response) => {
     const user_id = request.body.user_id;
     const banned = request.body.ban_id;
 
-    user.findOneAndUpdate({_id: user_id}, {$addToSet: {baned: banned}}, function (err) {
+    user.findOneAndUpdate({_id: user_id}, {$addToSet: {baned: banned}}, (err) => {
         if (err) {
             console.log(err);
         } else {
-            response.send(JSON.stringify({
-                message: 'Successful Ban :('
-            }))
+            follow.findOneAndRemove({id_leader: user_id}, (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    response.send(JSON.stringify({
+                        message: 'Successful Ban :('
+                    }))
+                }
+            })
         }
     })
 });
@@ -26,11 +32,10 @@ router.put('/ban', (request, response) => {
     // console.log(request.query);
     console.log('User_id : ' + user_id + ' - Ban_id : ' + banned);
 
-    user.findOneAndUpdate({_id: user_id}, {$pull: {baned: banned}}, function (err) {
+    user.findOneAndUpdate({_id: user_id}, {$pull: {baned: banned}}, (err) => {
         if (err) {
             console.log(err);
         } else {
-            // follow.findOneAndRemove()
             response.send(JSON.stringify({
                 message: 'Successful UnBan :D'
             }))
@@ -43,7 +48,7 @@ router.get('/ban', (request, response) => {
     user.find(query)
         .select('baned')
         .populate('baned') // multiple path names in one requires mongoose >= 3.6
-        .exec(function(err, BanDocuments) {
+        .exec((err, BanDocuments) => {
             if(err){
                 console.log(err);
             }
