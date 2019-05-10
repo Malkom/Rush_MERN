@@ -5,25 +5,13 @@ let article = require('../Models/articles');
 let user = require('../Models/users');
 
 router.get('/articles', (request, response) => {
-    const user_id = request.query.id;
-    console.log(user_id);
-    user.findById(user_id)
-        .select('follows')
-        .exec(function(err, UserFollows){
-            if(err){
-                console.log(err)}
-            else {
-                UserFollows.follows.push(user_id);
-                // console.log(UserFollows.follows);
-                article.find({ idCreator : { $in : UserFollows.follows} }, null, {sort:{updated_at: -1}}, function(err, articles){
-                    // console.log(articles);
-                    if(err) console.log(err);
-                    else{
-                        response.json(articles);
-                    }
-                });
-            }
-        });
+    article.find({}, null, {sort: {update_at : -1}}, function(err, articles){
+        // console.log(articles);
+        if(err) console.log(err);
+        else{
+            response.json(articles);
+        }
+    });
 });
 
 router.post('/article/add', (request, response) => {

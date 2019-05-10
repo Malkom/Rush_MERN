@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 /*import { Redirect } from 'react-router';*/
 import TableRow from './TableRow';
+import SwitchButton from './SwitchButton';
 import jwt_decode from 'jwt-decode';
 import imgBack from '../img/indian-village.png';
 
@@ -14,38 +15,65 @@ export default class Articles extends React.Component {
             login : '',
             id:'',
             date: '',
-            time: new Date().toLocaleTimeString()
+            time: new Date().toLocaleTimeString(),
+            followers: []
         };
+        this.SwitchFollowButton = this.SwitchFollowButton.bind(this);
         this.getAlert = this.getAlert.bind(this);
     }
     
     componentDidMount(){
+        //console.log(this.state.followers);
           const token = localStorage.usertoken;
           if(!token){
               this.props.history.push('/login')
           }
           else {
-              const decoded = jwt_decode(token);
-              this.setState({
-                  login: decoded.login,
-                  id : decoded._id
-              });
+                const decoded = jwt_decode(token);
+                this.setState({
+                    login: decoded.login,
+                    id : decoded._id
+                });
 
-              axios.get('http://localhost:4242/articles', { params : { id: decoded._id }})
-                  .then(response => {
-                      // console.log(response.data);
-                      this.setState({articles: response.data});
-                  })
-                  .catch(function (error) {
-                      console.log(error);
-                  })
-          }
-      }
+                    axios.get('http://localhost:4242/articles')
+                    .then(response => {
+                        // console.log(response.data);
+                        this.setState({articles: response.data});
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            
+                    axios.get('http://localhost:4242/follow', {params: {id: decoded._id}})
+                    .then(response => {
+                        //console.log(response.data);
+                        this.setState({followers: response.data});
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                }
+  }
 
-      tab(){
+    SwitchFollowButton(idCreator){
+        let id_inList = idCreator;
+        var newArray = [];
+        console.log(this);
+        console.log(this.state.followers);
+        this.state.followers.map(function(object){
+            return newArray.push(object.id_leader._id); 
+            //console.log(object.id_leader._id);
+        });
+        //console.log(newArray);
+        return (newArray.indexOf(id_inList) === -1 ) ?
+                <SwitchButton user_id = {this.state.id} id={id_inList} bool={false}/> :
+                <SwitchButton user_id = {this.state.id} id={id_inList} bool={true}/>;  
+    }
+
+    tab(){
         let self = this;
         return this.state.articles.map(function(object, i){
-            return <TableRow obj={object} key={i} var={i} alert={self.getAlert} />;
+            return <TableRow obj={object} key={i} var={i} alert={self.getAlert} tooglefollow={self.SwitchFollowButton}/>;
         });
       }
 

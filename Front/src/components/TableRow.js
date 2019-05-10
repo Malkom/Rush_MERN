@@ -10,6 +10,7 @@ class TableRow extends Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
+        //this.tooglefollow = this.tooglefollow.bind(this);
         this.state = {
             login : '',
             email : '',
@@ -31,7 +32,18 @@ class TableRow extends Component {
         idCreator: this.props.obj.idCreator
     });
 
-    
+    axios.get('http://localhost:4242/users/findOneByIdCreator', { params : { id: this.props.obj.idCreator }})
+                  .then(response => {
+                      console.log(response.data.login);
+                      this.setState({
+                        result: response.data.login,
+                      })
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                  })
+
+
   }
 
   onSubmit(e) {
@@ -59,6 +71,7 @@ class TableRow extends Component {
   render() {
     let edit;
     let remove;
+    console.log(this.props.obj.idCreator);
     if(this.props.obj.idCreator === this.state.id)
     {
       edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
@@ -82,6 +95,7 @@ class TableRow extends Component {
                     <div className = "card card-inverse card-info" >
                         <div className="card-header">
                                 <img className="avatar" src="https://picsum.photos/30/30/" alt="avatar"></img>
+                                {this.state.result}
                             <div className="float-right d-inline-flex">
                                 {edit}
                                 {remove}
@@ -102,7 +116,7 @@ class TableRow extends Component {
                             <small>
                                 Last updated { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") } hour(s) ago
                             </small>
-                            <button className="btn btn-primary float-right btn-sm">Follow</button>
+                            {this.props.tooglefollow(this.props.obj.idCreator)}
                         </div>
                     </div>
                 </div>

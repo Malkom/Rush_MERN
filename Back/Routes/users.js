@@ -17,6 +17,18 @@ router.get('/users/findUsers', (request, response) => {
     });
 })
 
+router.get('/users/findOneByIdCreator', (request, response) => {
+    let param = {_id: request.query.id};
+    //console.log(param);
+    user.findById(param , function(err, user){
+        //console.log(users);
+        if(err) console.log(err);
+        else{
+            response.json(user);
+        }    
+    });
+})
+
 router.get('/users/findFollowers', (request, response) => {
     let param = request.query.id;
     //console.log(param);
