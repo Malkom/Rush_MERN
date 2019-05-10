@@ -64,4 +64,23 @@ router.get('/leader', (request, response) => {
         });
 });
 
+router.delete('/follow', (request, response) => {
+    let query = {id_leader: request.query.id};
+    console.log(query);
+    follow.findOneAndRemove(query, function(err, usersDocuments) {
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+            response.send(JSON.stringify({
+                message: 'Successful'
+                }));
+        }
+    });
+});
+
+
+
+
 module.exports = router;

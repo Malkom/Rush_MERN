@@ -13,7 +13,7 @@ class TableMember extends Component {
             user_id: '',
             login : '',
             email : '',
-            followers: [] 
+            followers: [],
     };
   }
   componentDidMount(){
@@ -25,10 +25,10 @@ class TableMember extends Component {
         login : decoded.login,
         email : decoded.email
     })
-    axios.get('http://localhost:4242/users/findFollowers', {params: {id: decoded.login}})
+    axios.get('http://localhost:4242/follow', {params: {id: decoded._id}})
                   .then(response => {
                       //console.log(response.data);
-                      this.setState({followers: response.data[0].follows});
+                      this.setState({followers: response.data});
                   })
                   .catch(function (error) {
                       console.log(error);
@@ -50,7 +50,7 @@ class TableMember extends Component {
               }
               else
               {
-                  console.log(response.data);
+                  //console.log(response.data);
               }
           })
           .catch((error) => {
@@ -59,8 +59,8 @@ class TableMember extends Component {
   }
 
   UnFollow(idMember){
-    //console.log(idMember);
-    axios.delete('http://localhost:4242/follow', idMember)
+    console.log(idMember);
+    axios.delete('http://localhost:4242/follow', {params: {id: idMember}})
     .then((response) => {
         if (response.data.message === 'Successful') {
             alert('You are not following this user.')
@@ -75,14 +75,28 @@ class TableMember extends Component {
     });
   }
 
-  render() {
+  tab(){
     let self = this;
+    let id_inList = this.props.obj._id;
+    var newArray = [];
+    //console.log(this.state.followers);
+    this.state.followers.map(function(object){
+        return newArray.push(object.id_leader._id); 
+        //console.log(object.id_leader._id);
+    });
+    //console.log(newArray);
+    return (newArray.indexOf(id_inList) === -1 ) ?
+            <SwitchButton id={id_inList} bool={false} follow={self.onFollow} unfollow={self.UnFollow}/> :
+            <SwitchButton id={id_inList} bool={true} follow={self.onFollow} unfollow={self.UnFollow}/>;  
+    }
+
+  render() {
     return (
         <tr className="row">
             <td className="col-lg-8">
             {this.props.obj.login}
             </td>
-            <SwitchButton array={this.state.followers} id={this.props.obj._id} follow={self.onFollow} unfollow={self.UnFollow}/>
+            {this.tab()}
         </tr>
     );
   }
