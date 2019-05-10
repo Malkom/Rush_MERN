@@ -7,6 +7,10 @@ export default class SwitchButton extends React.Component {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
         this.NotFollow = this.NotFollow.bind(this);
+        this.state = {
+            follow: this.props.bool
+        }
+        // console.log('CTOR Props : ', this.props.bool);
     }
 
     onSubmit(e) {
@@ -21,6 +25,7 @@ export default class SwitchButton extends React.Component {
         axios.post('http://localhost:4242/follow', follow)
         .then((response) => {
             if (response.data.message === 'Successful Follow :D') {
+                this.setState({follow: true});
                 alert('Successful Follow :D')
             }
             else
@@ -40,7 +45,8 @@ export default class SwitchButton extends React.Component {
         axios.delete('http://localhost:4242/follow', {params: {id: this.props.id}})
         .then((response) => {
             if (response.data.message === 'Successful') {
-                alert('You are not following this user.')
+                this.setState({follow: false});
+                alert('You are not following this user.');
                 if(this.props.update)
                 {
                     this.props.update(this.props.index);
@@ -60,8 +66,9 @@ export default class SwitchButton extends React.Component {
         let value = '';
         let className = '';
         let onSubmit = null;
-        //console.log(this.props.id);
-        if(this.props.bool === true)
+        // console.log(this.state.follow);
+        // console.log('Props : ', this.props.bool);
+        if(this.state.follow === true)
         {
             value = 'Unfollow';
             className = 'btn btn-outline-primary';
@@ -79,6 +86,11 @@ export default class SwitchButton extends React.Component {
                     <input type="submit" value={value} className={className}/>
                 </div>
             </form>
+                <form onSubmit={onSubmit}>
+                    <div className="form-group">
+                        <input type="submit" value={value} className={className} />
+                    </div>
+                </form>
         )
       }
 }
