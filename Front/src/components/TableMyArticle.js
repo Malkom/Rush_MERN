@@ -9,8 +9,6 @@ let dateFormat = require('dateformat');
 class TableRow extends Component {
     constructor(props) {
         super(props);
-        this.onSubmit = this.onSubmit.bind(this);
-        //this.tooglefollow = this.tooglefollow.bind(this);
         this.state = {
             login : '',
             email : '',
@@ -42,51 +40,9 @@ class TableRow extends Component {
                   .catch(function (error) {
                       console.log(error);
                   })
-
-
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-    //console.log(typeof this.state.id);
-    //let string_id = JSON.stringify(this.state.id);
-    axios.delete('http://localhost:4242/article/delete', { params : { id: this.state.idArticle }})
-    .then((response) => {
-        if(response.data.message === "Successful")
-        {
-            this.props.alert(this.props.var);
-        }
-        else
-        {
-            this.setState({
-                wrong: response.data.message
-            });
-        }
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-}
-
   render() {
-    let edit;
-    let remove;
-    console.log(this.props.obj.idCreator);
-    if(this.props.obj.idCreator === this.state.id)
-    {
-      edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
-                <div className="form-group mr-1">
-                  <input type="submit" value="Edit Article" className="btn btn-primary btn-sm"/>
-                </div>
-              </form>
-              )
-      remove = (<form onSubmit={this.onSubmit}>
-              <div className="form-group mr-1">
-                <input type="submit" value="Delete Article" className="btn btn-primary btn-sm"/>
-              </div>
-            </form>
-            )
-    }
     return (
         <div className="container">
             <div className="row">
@@ -97,8 +53,6 @@ class TableRow extends Component {
                                 <img className="avatar" src="https://picsum.photos/30/30/" alt="avatar"></img>
                                 {this.state.result}
                             <div className="float-right d-inline-flex">
-                                {edit}
-                                {remove}
                                 <form action={'/' + this.state.login + '/show_article/' + this.props.obj._id}>
                                     <div className="form-group">
                                         <input type="submit" value="Show Article" className="btn btn-primary btn-sm"/>
@@ -116,7 +70,6 @@ class TableRow extends Component {
                             <small>
                                 Last updated { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") } hour(s) ago
                             </small>
-                            {this.props.tooglefollow(this.props.obj.idCreator)}
                         </div>
                     </div>
                 </div>

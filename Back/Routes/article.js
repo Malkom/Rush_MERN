@@ -3,6 +3,7 @@ let router = express.Router();
 
 let article = require('../Models/articles');
 let user = require('../Models/users');
+let follow = require('../Models/follows');
 
 router.get('/articles', (request, response) => {
     article.find({})
@@ -12,6 +13,33 @@ router.get('/articles', (request, response) => {
         if(err) console.log(err);
         else{
             response.json(articles);
+        }
+    });
+});
+
+router.get('/articlesByFollow', (request, response) => {
+    let query = {id_follower : request.query.id};
+    follow.find(query)
+    .select('id_leader -_id')
+    .exec(function(err, follower){
+        if(err) console.log(err);
+        else{
+            myarray=[];
+            //console.log(follower[0].id_leader);
+            follower.forEach(function(item){
+                myarray.push(item.id_leader);
+            })
+            myarray.push(request.query.id.toString());
+            console.log(myarray);
+            article.find({idCreator: {$in: myarray}}, null, {sort: {updated_at: -1}}, function(err, articles){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    //console.log(articles);
+                    response.json(articles);
+                }
+            })
         }
     });
 });

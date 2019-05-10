@@ -50,6 +50,9 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
             <li className="nav-item">
+                <Link to={"/" + this.state.login + "/myarticles"} className='navbar-brand'>My Followed Articles</Link>
+            </li>
+            <li className="nav-item">
                 <Link to={"/" + this.state.login + "/articles"} className='navbar-brand'>Articles</Link>
             </li>
             <li className="nav-item">

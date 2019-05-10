@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import MemberList from './components/MemberList';
+import MyArticle from './components/my_articles.component';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/:user/profile" component={Profile}/>
         <Route path="/:user/edit_profile" component={EditProfile}/>
         <Route path='/:user/articles' component={blogArticle} />
+        <Route path='/:user/myarticles' component={MyArticle} />
         <Route path="/:user/add_article" component={blogAdd_Article}/>
         <Route path="/:user/edit_article/:id" component={blogEdit_Article}/>
         <Route path="/:user/show_article/:id" component={blogShow_Article}/>
