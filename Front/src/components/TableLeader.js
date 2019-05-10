@@ -45,9 +45,8 @@ class TableLeader extends Component {
             .then((response) => {
                 if (response.data.message === 'Successful Ban :(') {
                     //alert('Successful Ban :(')
-                    this.setState({
-                        ban : true
-                    })
+                    this.setState({ban : true});
+                    this.props.update(this.props.var)
                 }
                 else
                 {
