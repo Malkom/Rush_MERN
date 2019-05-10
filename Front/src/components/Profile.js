@@ -7,8 +7,8 @@ import TableFollower from './TableFollower';
 import TableLeader from './TableLeader';
 
 class Profile extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onSubmit = this.onSubmit.bind(this);
         this.UpdateList = this.UpdateList.bind(this);
 
@@ -16,7 +16,7 @@ class Profile extends Component {
             login : '',
             email:'', 
             wrong: '',
-            id: '',
+            user_id: '',
             result: [],
             leader: []
         }
@@ -32,7 +32,7 @@ class Profile extends Component {
             this.setState({
                 login : decoded.login,
                 email: decoded.email,
-                id: decoded._id
+                user_id: decoded._id
             });
 
             // REQUETE POUR RECUPERER LES FOLLOWERS //
@@ -54,9 +54,7 @@ class Profile extends Component {
                 .catch(function (error) {
                     console.log(error);
                 })
-
         }
-
     }
 
     tab(){
@@ -67,12 +65,13 @@ class Profile extends Component {
     }
 
     tabLeader(){
-        console.log(this.state.leader);
+        // console.log(this.state.leader);
         return this.state.leader.map(function(object, key){
-            return <TableLeader obj={object} key={key}/>;
+            return <TableLeader obj={object} key={key} />;
         })
     }
 
+<<<<<<< HEAD
     UpdateList(key){
         var array = [...this.state.result]; // make a separate copy of the arra
         if (key !== -1) {
@@ -83,6 +82,8 @@ class Profile extends Component {
 
 
 
+=======
+>>>>>>> 16c378d897b2581f1b33074f5931c6dd4ef5df58
     onSubmit(e) {
         e.preventDefault();
         //console.log(typeof this.state.id);

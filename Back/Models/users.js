@@ -22,9 +22,13 @@ let userSchema = mongoose.Schema({
         type : Boolean,
         default : false
     },
-    follows:[{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "Follow",
+    follows :[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Follow"
+    }],
+    baned :[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'user'
     }]
 });
 
