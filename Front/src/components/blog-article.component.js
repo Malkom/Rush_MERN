@@ -58,8 +58,6 @@ export default class Articles extends React.Component {
     SwitchFollowButton(idCreator){
         let id_inList = idCreator;
         var newArray = [];
-        console.log(this);
-        console.log(this.state.followers);
         this.state.followers.map(function(object){
             return newArray.push(object.id_leader._id); 
             //console.log(object.id_leader._id);

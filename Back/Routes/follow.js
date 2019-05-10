@@ -8,26 +8,44 @@ router.post('/follow', (request, response) => {
     const follower = request.body.user_id;
     const leader = request.body.leader_id;
 
-    let newFollow = new follow({
-        id_follower: follower,
-        id_leader : leader
-    });
-
-    newFollow.save((err) => {
-        if(err){
+    user.findOne( {_id: leader, baned: follower }, function(err, ban){
+        if(err)
+        {
             console.log(err);
         }
-        else {
+        else if(!ban)
+        {
+            //console.log("You can follow this user");
+            let newFollow = new follow({
+                id_follower: follower,
+                id_leader : leader
+            });
+        
+            newFollow.save((err) => {
+                if(err){
+                    console.log(err);
+                }
+                else {
+                    response.send(JSON.stringify({
+                        message: 'Successful Follow :D'
+                    }));
+                }
+            })
+        }
+        else
+        {
+            //console.log(ban);
             response.send(JSON.stringify({
-                message: 'Successful Follow :D'
+                message: 'Error'
             }));
         }
-    })
+
+    });
 });
 
 router.get('/follow', (request, response) => {
     let query = {id_follower: request.query.id};
-    console.log(query);
+    //console.log(query);
     follow.find(query)
     .select('id_leader')
     .populate('id_leader') // multiple path names in one requires mongoose >= 3.6
@@ -62,7 +80,7 @@ router.get('/leader', (request, response) => {
 
 router.delete('/follow', (request, response) => {
     let query = {id_leader: request.query.id};
-    console.log(query);
+    //console.log(query);
     follow.findOneAndRemove(query, function(err, usersDocuments) {
         if(err){
             console.log(err);

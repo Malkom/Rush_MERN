@@ -154,6 +154,11 @@ footer{
   margin-bottom: 20px;
 }
 
+#cactus{
+  top: 90px;
+  width: 30%;
+}
+
 .user{
   margin-left: 100px;
 }

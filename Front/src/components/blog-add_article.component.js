@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import jwt_decode from 'jwt-decode';
 import Textarea from './Textarea';
 import Counter from './Counter';
+import Cactus from '../img/cactus.png';
 
 export default class AddArticle extends React.Component {
     constructor(props) {
@@ -86,6 +87,7 @@ export default class AddArticle extends React.Component {
       render() {
         return (
             <div className="container">
+                <img id='cactus' className="bg" src={Cactus} alt="Logo"></img>
                 <div style={{marginTop: 50, marginLeft: 200, marginRight:350}}>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">

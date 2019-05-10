@@ -25,7 +25,7 @@ export default class SwitchButton extends React.Component {
             }
             else
             {
-                //console.log(response.data);
+                alert('You cannot follow this user. Sorry :( ')
             }
         })
         .catch((error) => {
