@@ -10,6 +10,7 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
+        this.UpdateList = this.UpdateList.bind(this);
 
         this.state = {
             login : '',
@@ -57,8 +58,9 @@ class Profile extends Component {
     }
 
     tab(){
-        return this.state.result.map(function(object, key){
-            return <TableFollower obj={object} key={key}/>;
+        let self = this;
+        return this.state.result.map(function(object, i){
+            return <TableFollower obj={object} key={i} var={i} update={self.UpdateList}/>;
         })
     }
 
@@ -68,6 +70,16 @@ class Profile extends Component {
             return <TableLeader obj={object} key={key} />;
         })
     }
+
+    UpdateList(key){
+        var array = [...this.state.result]; // make a separate copy of the arra
+        if (key !== -1) {
+          array.splice(key, 1);
+          this.setState({result: array});
+        }
+      }
+
+
 
     onSubmit(e) {
         e.preventDefault();

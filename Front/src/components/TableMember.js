@@ -6,8 +6,6 @@ import SwitchButton from './SwitchButton';
 class TableMember extends Component {
     constructor(props) {
         super(props);
-        this.onFollow = this.onFollow.bind(this);
-        this.UnFollow = this.UnFollow.bind(this);
 
         this.state = {
             user_id: '',
@@ -35,48 +33,7 @@ class TableMember extends Component {
                   })
   }
 
-  onFollow(){
-      /* console.log(this.state.login);
-      console.log(this.props.obj._id); */
-      const follow = {
-          user_id: this.state.user_id,
-          leader_id: this.props.obj._id
-      };
-
-      axios.post('http://localhost:4242/follow', follow)
-          .then((response) => {
-              if (response.data.message === 'Successful Follow :D') {
-                  alert('Successful Follow :D')
-              }
-              else
-              {
-                  //console.log(response.data);
-              }
-          })
-          .catch((error) => {
-              console.error(error);
-          });
-  }
-
-  UnFollow(idMember){
-    console.log(idMember);
-    axios.delete('http://localhost:4242/follow', {params: {id: idMember}})
-    .then((response) => {
-        if (response.data.message === 'Successful') {
-            alert('You are not following this user.')
-        }
-        else
-        {
-            console.log(response.data);
-        }
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-  }
-
   tab(){
-    let self = this;
     let id_inList = this.props.obj._id;
     var newArray = [];
     //console.log(this.state.followers);
@@ -86,8 +43,8 @@ class TableMember extends Component {
     });
     //console.log(newArray);
     return (newArray.indexOf(id_inList) === -1 ) ?
-            <SwitchButton id={id_inList} bool={false} follow={self.onFollow} unfollow={self.UnFollow}/> :
-            <SwitchButton id={id_inList} bool={true} follow={self.onFollow} unfollow={self.UnFollow}/>;  
+            <SwitchButton user_id = {this.state.user_id} id={id_inList} bool={false}/> :
+            <SwitchButton user_id = {this.state.user_id} id={id_inList} bool={true}/>;  
     }
 
   render() {
