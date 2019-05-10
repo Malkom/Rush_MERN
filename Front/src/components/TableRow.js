@@ -27,8 +27,11 @@ class TableRow extends Component {
         login : decoded.login,
         email : decoded.email,
         id: decoded._id,
-        idArticle: this.props.obj._id
+        idArticle: this.props.obj._id,
+        idCreator: this.props.obj.idCreator
     });
+
+    
   }
 
   onSubmit(e) {

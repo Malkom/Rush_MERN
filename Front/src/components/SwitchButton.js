@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 
 export default class SwitchButton extends React.Component {
@@ -10,13 +11,49 @@ export default class SwitchButton extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.follow();
+    /* console.log(this.state.login);
+      console.log(this.props.obj._id); */
+      const follow = {
+        user_id: this.props.user_id,
+        leader_id: this.props.id
+        };
+
+        axios.post('http://localhost:4242/follow', follow)
+        .then((response) => {
+            if (response.data.message === 'Successful Follow :D') {
+                alert('Successful Follow :D')
+            }
+            else
+            {
+                //console.log(response.data);
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     NotFollow(e)
     {
         e.preventDefault();
-        this.props.unfollow(this.props.id);
+        //this.props.unfollow(this.props.id);
+        axios.delete('http://localhost:4242/follow', {params: {id: this.props.id}})
+        .then((response) => {
+            if (response.data.message === 'Successful') {
+                alert('You are not following this user.')
+                if(this.props.update)
+                {
+                    this.props.update(this.props.index);
+                }
+            }
+            else
+            {
+                console.log(response.data);
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     render () {
