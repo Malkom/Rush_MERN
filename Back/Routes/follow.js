@@ -8,26 +8,21 @@ router.post('/follow', (request, response) => {
     const follower = request.body.user_id;
     const leader = request.body.leader_id;
 
-    user.findOneAndUpdate({_id: follower}, {$addToSet: {follows: leader}}, {upsert: true}, function(err){
+    let newFollow = new follow({
+        id_follower: follower,
+        id_leader : leader
+    });
+
+    newFollow.save((err) => {
         if(err){
             console.log(err);
         }
-        let newFollow = new follow({
-            id_follower: follower,
-            id_leader : leader
-        });
-    
-        newFollow.save((err) => {
-            if(err){
-                console.log(err);
-            }
-            else {
-                response.send(JSON.stringify({
-                    message: 'Successful Follow :D'
-                }));
-            }
-        })
-    }) 
+        else {
+            response.send(JSON.stringify({
+                message: 'Successful Follow :D'
+            }));
+        }
+    })
 });
 
 router.get('/follow', (request, response) => {
