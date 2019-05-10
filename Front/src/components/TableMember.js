@@ -53,7 +53,9 @@ class TableMember extends Component {
             <td className="col-lg-8">
             {this.props.obj.login}
             </td>
-            {this.tab()}
+            <td className="col-lg-4">
+                {this.tab()}
+            </td>
         </tr>
     );
   }

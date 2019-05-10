@@ -27,7 +27,9 @@ class TableFollower extends Component {
     return (
         <tr className="row">
             <td>{this.props.obj.id_leader.login}</td>
-                <SwitchButton update={this.props.update} index={this.props.var} user_id={this.state.user_id} id={this.props.obj.id_leader._id} bool={true}/>
+            <td className="col-lg-4">
+              <SwitchButton update={this.props.update} index={this.props.var} user_id={this.state.user_id} id={this.props.obj.id_leader._id} bool={true}/>  
+            </td>
         </tr>
     );
   }

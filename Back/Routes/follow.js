@@ -27,6 +27,7 @@ router.post('/follow', (request, response) => {
 
 router.get('/follow', (request, response) => {
     let query = {id_follower: request.query.id};
+    console.log(query);
     follow.find(query)
     .select('id_leader')
     .populate('id_leader') // multiple path names in one requires mongoose >= 3.6
@@ -36,7 +37,7 @@ router.get('/follow', (request, response) => {
         }
         else
         {
-            // console.log('%j', usersDocuments);
+            //console.log('%j', usersDocuments);
             response.json(usersDocuments);
         }
     });
