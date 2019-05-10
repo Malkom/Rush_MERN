@@ -5,7 +5,9 @@ let article = require('../Models/articles');
 let user = require('../Models/users');
 
 router.get('/articles', (request, response) => {
-    article.find({}, null, {sort: {update_at : -1}}, function(err, articles){
+    article.find({})
+        .sort({updated_at: -1})
+        .exec(function(err, articles){
         // console.log(articles);
         if(err) console.log(err);
         else{
