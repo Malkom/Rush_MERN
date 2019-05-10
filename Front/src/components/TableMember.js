@@ -42,9 +42,9 @@ class TableMember extends Component {
         //console.log(object.id_leader._id);
     });
     //console.log(newArray);
-    return (newArray.indexOf(id_inList) === -1 ) ?
+    return (newArray.length > 0) ? (newArray.indexOf(id_inList) === -1 ) ?
             <SwitchButton user_id = {this.state.user_id} id={id_inList} bool={false}/> :
-            <SwitchButton user_id = {this.state.user_id} id={id_inList} bool={true}/>;  
+            <SwitchButton user_id = {this.state.user_id} id={id_inList} bool={true}/> : null;
     }
 
   render() {
