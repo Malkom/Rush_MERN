@@ -86,11 +86,6 @@ export default class SwitchButton extends React.Component {
                     <input type="submit" value={value} className={className}/>
                 </div>
             </form>
-                <form onSubmit={onSubmit}>
-                    <div className="form-group">
-                        <input type="submit" value={value} className={className} />
-                    </div>
-                </form>
         )
       }
 }
