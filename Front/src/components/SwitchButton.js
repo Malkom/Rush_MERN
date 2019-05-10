@@ -26,7 +26,7 @@ export default class SwitchButton extends React.Component {
         .then((response) => {
             if (response.data.message === 'Successful Follow :D') {
                 this.setState({follow: true});
-                alert('Successful Follow :D')
+                // alert('Successful Follow :D')
             }
             else
             {
@@ -46,7 +46,7 @@ export default class SwitchButton extends React.Component {
         .then((response) => {
             if (response.data.message === 'Successful') {
                 this.setState({follow: false});
-                alert('You are not following this user.');
+                // alert('You are not following this user.');
                 if(this.props.update)
                 {
                     this.props.update(this.props.index);
@@ -82,7 +82,7 @@ export default class SwitchButton extends React.Component {
         }
         return (
             <form onSubmit={onSubmit}>
-                <div className="form-group float-right">
+                <div className="form-group">
                     <input type="submit" value={value} className={className}/>
                 </div>
             </form>

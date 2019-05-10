@@ -29,7 +29,7 @@ export default class Login extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log(`email is ${this.state.email}, password is ${this.state.password}`);
+        // console.log(`email is ${this.state.email}, password is ${this.state.password}`);
         
         const user = {
             email: this.state.email,
@@ -37,11 +37,11 @@ export default class Login extends React.Component {
         }
         login(user)
         .then((response) => {
-            console.log(response.data.name)
+            // console.log(response.data.name)
             if(response.data.message === "Successful")
             {
                 localStorage.setItem('usertoken', response.data.token)
-                console.log(response.data);
+                // console.log(response.data);
                 this.setState({
                     wrong: '',
                     cred: response.data.name,

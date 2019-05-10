@@ -119,7 +119,7 @@ class Profile extends Component {
         return (
                 <div className="row">
                     <img id="profile" className="bg" src={imgHead} alt="Logo"></img>
-                    <div className='col-lg-3'>
+                    <div className='col-lg-4'>
                     <div className="jumbotron ml-3 mt-5">
                             <div className="col-sm-8 mx-auto">
                             <img id="img_profile" src={anonyme} alt="Profile_image"></img>
@@ -148,7 +148,7 @@ class Profile extends Component {
                                 </form>
                         </div>
                     </div>
-                    <div className='col-lg-5'>
+                    <div className='col-lg-3'>
                         <table className="table table-striped mx-3">
                             <thead>
                                 <tr className="row">
@@ -160,7 +160,8 @@ class Profile extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className='col-lg-4'>
+                    <div className='col-lg-1'></div>
+                    <div className='col-lg-3'>
                         <table className="table table-striped mx-3">
                             <thead>
                             <tr className="row">
@@ -172,7 +173,8 @@ class Profile extends Component {
                             </tbody>
                         </table>
                     </div>
-                </div>  
+                    <div className='col-lg-1'></div>
+                </div>
         )        
 
     }

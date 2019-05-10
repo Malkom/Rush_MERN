@@ -34,7 +34,7 @@ class TableRow extends Component {
 
     axios.get('http://localhost:4242/users/findOneByIdCreator', { params : { id: this.props.obj.idCreator }})
                   .then(response => {
-                      console.log(response.data.login);
+                      // console.log(response.data.login);
                       this.setState({
                         result: response.data.login,
                       })
@@ -71,7 +71,7 @@ class TableRow extends Component {
   render() {
     let edit;
     let remove;
-    console.log(this.props.obj.idCreator);
+    // console.log(this.props.obj.idCreator);
     if(this.props.obj.idCreator === this.state.id)
     {
       edit = (<form action={'/' + this.state.login + '/edit_article/' + this.props.obj._id}>
@@ -116,7 +116,9 @@ class TableRow extends Component {
                             <small>
                                 Last updated { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") } hour(s) ago
                             </small>
-                            {this.props.tooglefollow(this.props.obj.idCreator)}
+                            <div className="float-right">
+                                {this.props.tooglefollow(this.props.obj.idCreator)}
+                            </div>
                         </div>
                     </div>
                 </div>

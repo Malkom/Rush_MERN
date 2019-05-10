@@ -28,7 +28,7 @@ router.post('/ban', (request, response) => {
 router.put('/ban', (request, response) => {
     const user_id = request.body.data.user_id;
     const banned = request.body.data.ban_id;
-    console.log(request.body);
+    // console.log(request.body);
     // console.log(request.query);
     console.log('User_id : ' + user_id + ' - Ban_id : ' + banned);
 
@@ -47,7 +47,7 @@ router.get('/ban', (request, response) => {
     let query = {_id: request.query.id};
     user.find(query)
         .select('baned')
-        .populate('baned') // multiple path names in one requires mongoose >= 3.6
+        .populate('baned', 'login') // multiple path names in one requires mongoose >= 3.6
         .exec((err, BanDocuments) => {
             if(err){
                 console.log(err);

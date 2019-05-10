@@ -32,7 +32,7 @@ class TableRow extends Component {
 
     axios.get('http://localhost:4242/users/findOneByIdCreator', { params : { id: this.props.obj.idCreator }})
                   .then(response => {
-                      console.log(response.data.login);
+                      // console.log(response.data.login);
                       this.setState({
                         result: response.data.login,
                       })
@@ -66,7 +66,7 @@ class TableRow extends Component {
                                 {this.props.obj.description}
                             </div>
                         </div>
-                        <div className="card-text mx-3">
+                        <div className="card-text mx-3 mb-3">
                             <small>
                                 Last updated { dateFormat(new Date() - new Date(this.props.obj.updated_at), "H") } hour(s) ago
                             </small>

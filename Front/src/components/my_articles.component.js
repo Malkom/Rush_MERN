@@ -34,7 +34,7 @@ export default class Articles extends React.Component {
 
                     axios.get('http://localhost:4242/articlesByFollow', {params: {id: decoded._id}})
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.setState({articles: response.data});
                     })
                     .catch(function (error) {

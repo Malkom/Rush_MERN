@@ -9,35 +9,53 @@ export default class MemberList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          users: [],
-          login : '', 
-          id:'',
-          email: '',
+            users: [],
+            login : '',
+            id:'',
+            email: '',
+            baned: []
         };
     }
-      componentDidMount(){
+    componentDidMount(){
         const token = localStorage.usertoken;
-          if(!token){
-              this.props.history.push('/login')
-          }
-          else {
-              const decoded = jwt_decode(token);
-              this.setState({
-                  id: decoded._id,
-                  login: decoded.login,
-                  email: decoded.email
-              });
+        if(!token){
+            this.props.history.push('/login')
+        }
+        else {
+            const decoded = jwt_decode(token);
+            this.setState({
+                id: decoded._id,
+                login: decoded.login,
+                email: decoded.email
+            });
 
-              axios.get('http://localhost:4242/users/findUsers', {params: {email: decoded.email}})
-                  .then(response => {
-                      //console.log(response.data);
-                      this.setState({users: response.data});
-                  })
-                  .catch(function (error) {
-                      console.log(error);
-                  })
-          }
-      }
+            axios.get('http://localhost:4242/users/findUsers', {params: {email: decoded.email}})
+                .then(response => {
+                    //console.log(response.data);
+                    this.setState({users: response.data});
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+            axios.get('http://localhost:4242/ban', {params: {id: decoded._id}})
+                .then(response => {
+                    // console.log(response.data[0].baned);
+                    this.setState({baned: response.data});
+
+                    response.data[0].baned.map( (object) => {
+                        return this.state.baned.push(object._id)
+                    });
+                    // console.log(this.state.baned);
+                })
+                .catch( (error) => {
+                    console.log(error);
+                });
+
+
+
+        }
+    }
       
       tab(){
         return this.state.users.map(function(object, i){
@@ -51,8 +69,9 @@ export default class MemberList extends React.Component {
               <table className="table table-striped">
                 <thead>
                   <tr className="row">
-                    <td className="col-lg-8"><strong>Geronimo's member</strong></td>
-                    <td className="col-lg-4"><strong>Follows</strong></td>
+                    <td className="col-lg-6"><strong>Geronimo's member</strong></td>
+                    <td className="col-lg-3"><strong>Follows</strong></td>
+                    <td className="col-lg-3"><strong>Leaders</strong></td>
                   </tr>
                 </thead>
                 <tbody>

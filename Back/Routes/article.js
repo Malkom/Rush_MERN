@@ -30,7 +30,7 @@ router.get('/articlesByFollow', (request, response) => {
                 myarray.push(item.id_leader);
             })
             myarray.push(request.query.id.toString());
-            console.log(myarray);
+            // console.log(myarray);
             article.find({idCreator: {$in: myarray}}, null, {sort: {updated_at: -1}}, function(err, articles){
                 if(err){
                     console.log(err);
@@ -87,7 +87,7 @@ router.get('/article/display', (request, response) => {
 
 router.post('/article/edit', (request, response) => {
     var query = { _id: request.body.id };
-    console.log(query);
+    // console.log(query);
     var update = {
         description: request.body.description};
 
