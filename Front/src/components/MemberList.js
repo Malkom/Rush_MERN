@@ -12,8 +12,7 @@ export default class MemberList extends React.Component {
             users: [],
             login : '',
             id:'',
-            email: '',
-            baned: []
+            email: ''
         };
     }
     componentDidMount(){
@@ -37,23 +36,6 @@ export default class MemberList extends React.Component {
                 .catch(function (error) {
                     console.log(error);
                 })
-
-            axios.get('http://localhost:4242/ban', {params: {id: decoded._id}})
-                .then(response => {
-                    // console.log(response.data[0].baned);
-                    this.setState({baned: response.data});
-
-                    response.data[0].baned.map( (object) => {
-                        return this.state.baned.push(object._id)
-                    });
-                    // console.log(this.state.baned);
-                })
-                .catch( (error) => {
-                    console.log(error);
-                });
-
-
-
         }
     }
       
