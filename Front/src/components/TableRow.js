@@ -70,10 +70,6 @@ class TableRow extends Component {
     });
 }
 
-    Search(value) {
-        alert("searching the Hashtag : " + value)
-    }
-
   render() {
     let edit;
     let remove;
@@ -115,9 +111,9 @@ class TableRow extends Component {
                         <div className = "card-block" >
                             <div className = "card-text m-3" >
                             <ReactHashtag renderHashtag={(hashtagValue) => (
-                                <button className="hashtag" value = {hashtagValue} onClick={this.Search.bind(this, hashtagValue)}>
+                                <a href="#" className="hashtag" onClick={() => {this.props.search(hashtagValue)}}>
                                     <ReactHashtag >{hashtagValue}</ReactHashtag>
-                                </button>)}>
+                                </a>)}>
                                 {this.props.obj.description}
                             </ReactHashtag>
                             </div>
