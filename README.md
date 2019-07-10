@@ -6,7 +6,7 @@ Rush de fin de cycle sur la stack MERN
 
 Réalisation d'un site MicroBlog type Twitter
 
-Réaslisé avec Céline Cossez : https://github.com/Nicole-Zessec
+Réalisé avec Céline Cossez : https://github.com/Nicole-Zessec
 
 ****************************************************************
 
