@@ -18,4 +18,4 @@ Rush of end of cycle on the MERN stack
 
 Realization of a MicroBlog site, Twitter like.
 
-Released with Céline Cossez: https://github.com/Nicole-Zessec
+Realized with Céline Cossez: https://github.com/Nicole-Zessec
